@@ -6,7 +6,7 @@ export default function SignUpPage() {
       appearance={{
         layout: {
           socialButtonsVariant: 'iconButton',
-          logoImageUrl: '/images/logo.png',
+          logoImageUrl: '/images/logo.gif',
         },
       }}
     />
