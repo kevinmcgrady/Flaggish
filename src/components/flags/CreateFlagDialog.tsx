@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/dialog';
 import { createFlag } from '@/queries/flags/createFlag';
 
+import { EnviromentType } from '../../types/EnviromentType';
 import { Button } from '../ui/button';
 import {
   Form,
@@ -141,8 +142,10 @@ export const CreateFlagDialog = ({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value='PRODUCTION'>Production</SelectItem>
-                          <SelectItem value='DEVELOPMENT'>
+                          <SelectItem value={EnviromentType.production}>
+                            Production
+                          </SelectItem>
+                          <SelectItem value={EnviromentType.development}>
                             Development
                           </SelectItem>
                         </SelectContent>

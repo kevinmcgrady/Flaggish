@@ -2,6 +2,7 @@
 
 import { currentUser } from '@clerk/nextjs/server';
 import { Enviroment } from '@prisma/client';
+import slugify from 'slugify';
 
 import { db } from '@/lib/db';
 
@@ -26,6 +27,7 @@ export const createFlag = async (
       projectId,
       enviroment: env,
       isToggled: true,
+      slug: slugify(name, { lower: true }),
     },
   });
 };

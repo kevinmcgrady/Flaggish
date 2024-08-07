@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { urls } from '@/core/urls';
+import { EnviromentType } from '@/types/EnviromentType';
 
 type FlagsListFormProps = {
   flags: Flag[];
@@ -36,15 +37,17 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
 
   const hasFlags = flags && flags.length > 0;
 
-  const FormSchema = z.object({
-    marketing_emails: z.boolean(),
-  });
+  const flagMap = flags.map((flag) => ({ [flag.slug]: z.boolean() }));
+
+  const FormSchema = z.object(Object.assign({}, ...flagMap));
+
+  const defaultValuesMap = flags.map((flag) => ({
+    [flag.slug]: flag.isToggled,
+  }));
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      marketing_emails: true,
-    },
+    defaultValues: Object.assign({}, ...defaultValuesMap),
   });
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
@@ -53,7 +56,7 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
 
   const handleEnvChange = (value: Enviroment) => {
     const url =
-      value === 'DEVELOPMENT'
+      value === EnviromentType.development
         ? urls.dashboard.flagsDev
         : urls.dashboard.flagsProd;
     router.push(url);
@@ -66,8 +69,10 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value='PRODUCTION'>production</SelectItem>
-          <SelectItem value='DEVELOPMENT'>development</SelectItem>
+          <SelectItem value={EnviromentType.production}>production</SelectItem>
+          <SelectItem value={EnviromentType.development}>
+            development
+          </SelectItem>
         </SelectContent>
       </Select>
 
@@ -83,7 +88,7 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                   <FormField
                     key={flag.id}
                     control={form.control}
-                    name='marketing_emails'
+                    name={flag.slug}
                     render={({ field }) => (
                       <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
                         <div className='space-y-0.5'>
@@ -107,7 +112,9 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
             </form>
           </Form>
         ) : (
-          <p>Create your first flag to begin</p>
+          <p className='text-sm text-muted-foreground'>
+            Create your first flag to begin
+          </p>
         )}
       </div>
     </Fragment>

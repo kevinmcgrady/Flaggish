@@ -41,6 +41,7 @@ model Flag {
   id          String     @id @default(uuid())
   name        String
   description String
+  slug        String
   isToggled   Boolean
   enviroment  Enviroment
 
