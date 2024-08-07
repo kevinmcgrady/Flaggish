@@ -25,10 +25,11 @@ model User {
 }
 
 model Project {
-  id          String @id @default(uuid())
-  name        String
-  description String
-  apiKey      String
+  id           String @id @default(uuid())
+  name         String
+  description  String
+  clientApiKey String
+  secretApiKey String
 
   User   User?   @relation(fields: [userId], references: [id])
   userId String?
@@ -37,10 +38,11 @@ model Project {
 }
 
 model Flag {
-  id         String     @id @default(uuid())
-  name       String
-  isToggled  Boolean
-  enviroment Enviroment
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  isToggled   Boolean
+  enviroment  Enviroment
 
   Project   Project? @relation(fields: [projectId], references: [id])
   projectId String?

@@ -6,7 +6,8 @@ export const urls = {
   },
   dashboard: {
     root: '/dashboard',
-    flags: '/flags',
+    flagsProd: '/flags/production',
+    flagsDev: '/flags/development',
     billing: '/billing',
     apiKeys: '/apiKeys',
   },

@@ -1,9 +1,17 @@
+import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
-import { ApiKeyInput } from '@/components/dashboard/ApiKeyInout';
+import { ApiKeyInput } from '@/components/dashboard/ApiKeyInput';
+import { getProject } from '@/queries/projects/getProject';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
-export default function ApiKeysPage() {
+export default async function ApiKeysPage() {
+  const project = await getProject();
+
+  if (!project) {
+    return notFound();
+  }
+
   return (
     <Fragment>
       <section className='bg-white p-4 rounded-xl'>
@@ -13,8 +21,16 @@ export default function ApiKeysPage() {
         </p>
       </section>
 
-      <ApiKeyInput label='Client Key' type={ApiKeyType.client} />
-      <ApiKeyInput label='Secret Key' type={ApiKeyType.secret} />
+      <ApiKeyInput
+        defaultApiKey={project.clientApiKey}
+        label='Client Key'
+        type={ApiKeyType.client}
+      />
+      <ApiKeyInput
+        defaultApiKey={project.secretApiKey}
+        label='Secret Key'
+        type={ApiKeyType.secret}
+      />
     </Fragment>
   );
 }

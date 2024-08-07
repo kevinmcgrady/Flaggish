@@ -11,10 +11,15 @@ import { ApiKeyType } from '@/types/ApiKeyType';
 type ApiKeyInoutProps = {
   label: string;
   type: ApiKeyType;
+  defaultApiKey: string;
 };
 
-export const ApiKeyInput = ({ label, type }: ApiKeyInoutProps) => {
-  const [apiKey, setApiKey] = useState<string>('');
+export const ApiKeyInput = ({
+  label,
+  type,
+  defaultApiKey,
+}: ApiKeyInoutProps) => {
+  const [apiKey, setApiKey] = useState<string>(defaultApiKey);
 
   const handleGenerateApiKey = async () => {
     const key = await generateKey(type);
