@@ -1,21 +1,9 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { Enviroment, Flag } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { Fragment } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form';
 import {
   Select,
   SelectContent,
@@ -25,7 +13,10 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { urls } from '@/core/urls';
+import { updateFlag } from '@/queries/flags/updateFlag';
 import { EnviromentType } from '@/types/EnviromentType';
+
+import { useToast } from '../ui/use-toast';
 
 type FlagsListFormProps = {
   flags: Flag[];
@@ -34,25 +25,8 @@ type FlagsListFormProps = {
 
 export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
   const router = useRouter();
-
+  const { toast } = useToast();
   const hasFlags = flags && flags.length > 0;
-
-  const flagMap = flags.map((flag) => ({ [flag.slug]: z.boolean() }));
-
-  const FormSchema = z.object(Object.assign({}, ...flagMap));
-
-  const defaultValuesMap = flags.map((flag) => ({
-    [flag.slug]: flag.isToggled,
-  }));
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: Object.assign({}, ...defaultValuesMap),
-  });
-
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
-  };
 
   const handleEnvChange = (value: Enviroment) => {
     const url =
@@ -60,6 +34,28 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
         ? urls.dashboard.flagsDev
         : urls.dashboard.flagsProd;
     router.push(url);
+  };
+
+  const handleFlagUpdate = async (
+    projectId: string,
+    isToggled: boolean,
+    flagId: string,
+  ) => {
+    try {
+      await updateFlag(projectId, flagId, isToggled);
+      toast({
+        variant: 'default',
+        title: 'Success!',
+        description: 'The flag has been updated.',
+      });
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: 'Oops!',
+        description: 'There was an error updating the flag, please try again',
+      });
+      router.refresh();
+    }
   };
 
   return (
@@ -78,39 +74,31 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
 
       <div className='bg-white p-4 rounded-xl mt-4'>
         {hasFlags ? (
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='w-full space-y-6'
-            >
-              <div className='space-y-4'>
-                {flags.map((flag) => (
-                  <FormField
-                    key={flag.id}
-                    control={form.control}
-                    name={flag.slug}
-                    render={({ field }) => (
-                      <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
-                        <div className='space-y-0.5'>
-                          <FormLabel className='text-base'>
-                            {flag.name}
-                          </FormLabel>
-                          <FormDescription>{flag.description}</FormDescription>
-                        </div>
-                        <FormControl>
-                          <Switch
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                          />
-                        </FormControl>
-                      </FormItem>
-                    )}
+          <div className='space-y-4'>
+            {flags.map((flag) => (
+              <div
+                key={flag.id}
+                className='flex flex-row items-center justify-between rounded-lg border p-4'
+              >
+                <div className='space-y-0.5'>
+                  <p className='text-base'>{flag.name}</p>
+                  <p>{flag.description}</p>
+                </div>
+                <div>
+                  <Switch
+                    defaultChecked={flag.isToggled}
+                    onCheckedChange={(checked) =>
+                      handleFlagUpdate(
+                        flag.projectId as string,
+                        checked,
+                        flag.id,
+                      )
+                    }
                   />
-                ))}
+                </div>
               </div>
-              <Button type='submit'>Update</Button>
-            </form>
-          </Form>
+            ))}
+          </div>
         ) : (
           <p className='text-sm text-muted-foreground'>
             Create your first flag to begin
