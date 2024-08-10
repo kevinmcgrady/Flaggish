@@ -1,20 +1,20 @@
 import { db } from '@/lib/db';
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   try {
-    // const body = await request.json();
+    const body = await request.json();
 
-    // if (!body.clientApiKey || !body.secretApiKey) {
-    //   return new Response(
-    //     JSON.stringify({ message: 'Please provide the client and secret key' }),
-    //     { status: 400 },
-    //   );
-    // }
+    if (!body.clientApiKey || !body.secretApiKey) {
+      return new Response(
+        JSON.stringify({ message: 'Please provide the client and secret key' }),
+        { status: 400 },
+      );
+    }
 
     const project = await db.project.findFirst({
       where: {
-        // clientApiKey: body.clientApiKey,
-        // secretApiKey: body.secretApiKey,
+        clientApiKey: body.clientApiKey,
+        secretApiKey: body.secretApiKey,
       },
       include: {
         flags: {

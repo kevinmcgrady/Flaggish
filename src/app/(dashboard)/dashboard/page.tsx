@@ -1,20 +1,7 @@
-'use client';
-import axios from 'axios';
-import { useEffect } from 'react';
+export default async function DashboardPage() {
+  const request = await fetch('https://flaggy-ten.vercel.app/api/getFlags');
+  const flags = await request.json();
 
-export default function DashboardPage() {
-  useEffect(() => {
-    axios
-      .get('https://flaggy-ten.vercel.app/api/getFlags')
-      .then((response) => {
-        return response.data();
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log('ERROR', error);
-      });
-  }, []);
+  console.log(flags);
   return <div>DASHBOARD</div>;
 }
