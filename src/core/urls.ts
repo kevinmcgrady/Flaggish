@@ -1,5 +1,9 @@
 export const urls = {
-  home: '/',
+  home: {
+    root: '/',
+    features: '/#features',
+    pricing: '/#pricing',
+  },
   auth: {
     signIn: '/sign-in',
     signUp: '/sign-up',

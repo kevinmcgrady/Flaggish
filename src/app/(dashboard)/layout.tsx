@@ -1,6 +1,5 @@
 import type React from 'react';
 
-import { Nav } from '@/components/core/Nav';
 import { LeftSidebar } from '@/components/dashboard/LeftSidebar';
 import { CreateProject } from '@/components/projects/CreateProject';
 import { syncUser } from '@/queries/auth/syncUser';
@@ -15,18 +14,19 @@ export default async function DashboardLayout({
   const hasProject = projects;
 
   return (
-    <div className='min-h-screen flex flex-col'>
-      <Nav />
-      {hasProject ? (
-        <section className='container px-0 md:px-8 flex flex-1 mb-4'>
-          <LeftSidebar />
-          <main className='flex-1 w-full mx-4'>{children}</main>
-        </section>
-      ) : (
-        <section className='container'>
-          <CreateProject />
-        </section>
-      )}
+    <div className='min-h-screen flex flex-col bg-[#F8F9FD]'>
+      <div className='mt-4'>
+        {hasProject ? (
+          <section className='container px-0 flex flex-1 mb-4'>
+            <LeftSidebar />
+            <main className='flex-1 w-full mx-4'>{children}</main>
+          </section>
+        ) : (
+          <section className='container'>
+            <CreateProject />
+          </section>
+        )}
+      </div>
     </div>
   );
 }

@@ -81,8 +81,10 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                 className='flex flex-row items-center justify-between rounded-lg border p-4'
               >
                 <div className='space-y-0.5'>
-                  <p className='text-base'>{flag.name}</p>
-                  <p>{flag.description}</p>
+                  <p className='text-base font-semibold'>{flag.name}</p>
+                  <p className='text-sm text-muted-foreground'>
+                    {flag.description}
+                  </p>
                 </div>
                 <div>
                   <Switch
