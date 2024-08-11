@@ -8,12 +8,10 @@ import { dashboardNavItems } from '@/core/dashboardNavItems';
 
 export const DashboardNav = () => {
   const pathname = usePathname();
-
   return (
     <nav className='p-4 bg-white flex flex-col gap-y-4 rounded-xl'>
       {dashboardNavItems.map((item) => {
         const isActive = pathname.includes(item.url);
-        console.log(pathname);
         return (
           <Link
             key={item.text}

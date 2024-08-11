@@ -4,7 +4,7 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    if (!body.clientApiKey || !body.secretApiKey) {
+    if (!body.clientApiKey || !body.secretApiKey || !body.env) {
       return new Response(
         JSON.stringify({ message: 'Please provide the client and secret key' }),
         { status: 400 },
@@ -18,10 +18,8 @@ export async function POST(request: Request) {
       },
       include: {
         flags: {
-          select: {
-            name: true,
-            slug: true,
-            isToggled: true,
+          where: {
+            enviroment: body.env,
           },
         },
       },

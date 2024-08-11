@@ -8,7 +8,12 @@ export const plans: PlanType[] = [
   {
     title: 'Free',
     price: '£0',
-    features: ['1 project', '10 flags', 'Create and manage flags'],
+    features: [
+      '1 project',
+      'Unlimited flags',
+      'Create and manage flags',
+      'Production and development flags',
+    ],
   },
   {
     title: 'Pro',
