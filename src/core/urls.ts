@@ -9,7 +9,7 @@ export const urls = {
     signUp: '/sign-up',
   },
   dashboard: {
-    root: '/dashboard',
+    projects: '/projects',
     flagsProd: '/flags/production',
     flagsDev: '/flags/development',
     billing: '/billing',

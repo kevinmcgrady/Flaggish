@@ -1,9 +1,14 @@
 'use client';
 
 import { Enviroment, Flag } from '@prisma/client';
-import { Pencil, Trash2 } from 'lucide-react';
+import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -88,15 +93,8 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                     {flag.description}
                   </p>
                 </div>
-                <div>
-                  <Button variant='ghost' size='icon'>
-                    <Pencil size={15} />
-                  </Button>
-                  <Button variant='ghost' size='icon'>
-                    <Trash2 size={15} />
-                  </Button>
-                </div>
-                <div>
+
+                <div className='flex items-center gap-4'>
                   <Switch
                     defaultChecked={flag.isToggled}
                     onCheckedChange={(checked) =>
@@ -107,6 +105,21 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                       )
                     }
                   />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant='outline' size='icon'>
+                        <Ellipsis size={15} />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className='w-fit flex gap-4'>
+                      <Button size='icon' variant='outline'>
+                        <Pencil size={15} />
+                      </Button>
+                      <Button size='icon' variant='outline'>
+                        <Trash2 size={15} />
+                      </Button>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
             ))}
