@@ -8,7 +8,7 @@ export const Hero = () => {
       <Image
         className='pt-20 mx-auto'
         src='/images/logo.png'
-        alt='Flaggy'
+        alt='Flaggish'
         width={50}
         height={50}
       />
@@ -16,7 +16,7 @@ export const Hero = () => {
         When feature flags <br /> meet NextJs
       </h2>
       <p className='text-center mt-4 text-xl font-light'>
-        Flaggy is a feature flag manager for NextJs
+        Flaggish is a feature flag manager for NextJs
       </p>
       <Clipboard />
     </header>

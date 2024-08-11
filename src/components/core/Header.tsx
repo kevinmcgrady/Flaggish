@@ -14,7 +14,7 @@ export const Header = () => {
         <Link href={urls.home.root}>
           <Image
             src='/images/logo.png'
-            alt='Flaggy logo'
+            alt='Flaggish logo'
             height={30}
             width={30}
           />

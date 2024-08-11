@@ -16,8 +16,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Flaggy',
-  description: 'Flaggy is an online feature flag manager',
+  title: 'Flaggish',
+  description: 'Flaggish is an online feature flag manager',
   icons: {
     icon: '/images/logo.png',
   },

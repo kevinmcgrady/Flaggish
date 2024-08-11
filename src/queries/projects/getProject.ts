@@ -13,21 +13,7 @@ export const getProject = async () => {
     where: {
       userId: authUser.id,
     },
-    include: {
-      flags: true,
-    },
   });
 
-  const productionFlagsCount = projects?.flags.filter(
-    (flag) => flag.enviroment === 'PRODUCTION',
-  ).length;
-  const developmentFlagsCount = projects?.flags.filter(
-    (flag) => flag.enviroment === 'DEVELOPMENT',
-  ).length;
-
-  return {
-    ...projects,
-    productionFlags: productionFlagsCount,
-    developmentFlags: developmentFlagsCount,
-  };
+  return projects;
 };

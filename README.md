@@ -1,3 +1,3 @@
-# Flaggy
+# Flaggish
 
-Flaggy is a online feature flag manager
+Flaggish is a online feature flag manager

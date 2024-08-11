@@ -6,7 +6,7 @@ import { useToast } from './use-toast';
 
 export const Clipboard = () => {
   const { toast } = useToast();
-  const command = 'npm i flaggy-helpers';
+  const command = 'npm i flaggish';
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(command);

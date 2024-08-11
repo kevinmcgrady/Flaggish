@@ -8,8 +8,8 @@ type FeatureSectionsProps = {
 };
 
 export const FeatureSection = ({ features }: FeatureSectionsProps) => {
-  const serverText = `# server component\n\nimport { getFlags } from 'flaggy-helpers';\n\nconst flags = await getFlags({clientApiKey: "", secretApiKey: ""});`;
-  const clientText = `# client component\n\nimport { useGetFlags } from 'flaggy-helpers';\n\nconst {flags, hasError, isLoading} = useGetFlags({clientApiKey: '', secretApiKey: ''});`;
+  const serverText = `# server component\n\nimport { getFlags } from 'flaggish';\n\nconst flags = await getFlags({clientApiKey: "", secretApiKey: ""});`;
+  const clientText = `# client component\n\nimport { useGetFlags } from 'flaggish';\n\nconst {flags, hasError, isLoading} = useGetFlags({clientApiKey: '', secretApiKey: ''});`;
 
   return (
     <section id='features' className='bg-zinc-900 py-32'>

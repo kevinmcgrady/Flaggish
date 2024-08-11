@@ -4,7 +4,6 @@ import { Fragment } from 'react';
 
 import { PageHeader } from '@/components/core/PageHeader';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { getProject } from '@/queries/projects/getProject';
 
 export default async function ProjectsPage() {
@@ -31,20 +30,6 @@ export default async function ProjectsPage() {
             Description:{' '}
             <span className='font-normal text-muted-foreground'>
               {project.description}
-            </span>
-          </p>
-
-          <h2 className='text-xl font-semibold mb-2'>Flags</h2>
-          <p className='text-md font-semibold mb-2'>
-            Production:{' '}
-            <span className='font-normal text-muted-foreground'>
-              {project.productionFlags}
-            </span>
-          </p>
-          <p className='text-md font-semibold '>
-            Development:{' '}
-            <span className='font-normal text-muted-foreground'>
-              {project.developmentFlags}
             </span>
           </p>
         </div>

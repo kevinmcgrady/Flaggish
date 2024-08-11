@@ -1,4 +1,4 @@
-import { ChevronDown, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -8,7 +8,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { navItems } from '@/core/navItems';
-import { urls } from '@/core/urls';
 import { cn } from '@/lib/utils';
 
 import { Button, buttonVariants } from '../ui/button';
