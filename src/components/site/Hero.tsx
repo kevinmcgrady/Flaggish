@@ -15,7 +15,7 @@ export const Hero = () => {
         width={50}
         height={50}
       />
-      <h2 className='text-center text-6xl md:text-7xl font-semibold mt-4'>
+      <h2 className='text-center text-5xl md:text-7xl font-semibold mt-4'>
         When feature flags <br /> meet NextJs
       </h2>
       <p className='text-center mt-4 text-xl font-light'>

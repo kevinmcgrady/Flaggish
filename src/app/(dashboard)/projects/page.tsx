@@ -2,7 +2,7 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
-import { PageHeader } from '@/components/core/PageHeader';
+import { PageHeader } from '@/components/site/PageHeader';
 import { Button } from '@/components/ui/button';
 import { getProject } from '@/queries/projects/getProject';
 

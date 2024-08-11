@@ -1,6 +1,6 @@
-import { FeatureSection } from '@/components/core/FeatureSection';
-import { Hero } from '@/components/core/Hero';
-import { PricingSection } from '@/components/core/PricingSections';
+import { FeatureSection } from '@/components/site/FeatureSection';
+import { Hero } from '@/components/site/Hero';
+import { PricingSection } from '@/components/site/PricingSections';
 import { features } from '@/core/features';
 import { plans } from '@/core/plans';
 

@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { PageHeader } from '@/components/core/PageHeader';
+import { PageHeader } from '@/components/site/PageHeader';
 
 export default async function BillingPage() {
   return (

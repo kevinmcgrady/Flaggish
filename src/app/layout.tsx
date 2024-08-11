@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import type React from 'react';
 
-import { Footer } from '@/components/core/Footer';
-import { Header } from '@/components/core/Header';
+import { Footer } from '@/components/site/Footer';
+import { Header } from '@/components/site/Header';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { MobileNav } from '@/components/core/MobileNav';
-import { Navigation } from '@/components/core/Navigation';
+import { MobileNav } from '@/components/site/MobileNav';
+import { Navigation } from '@/components/site/Navigation';
 import { urls } from '@/core/urls';
 
 import { AuthNav } from './AuthNav';
