@@ -1,6 +1,7 @@
 'use client';
 
 import { Enviroment, Flag } from '@prisma/client';
+import { Pencil, Trash2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import {
@@ -15,6 +16,7 @@ import { urls } from '@/core/urls';
 import { updateFlag } from '@/queries/flags/updateFlag';
 import { EnviromentType } from '@/types/EnviromentType';
 
+import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
 
 type FlagsListFormProps = {
@@ -53,6 +55,7 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
         title: 'Oops!',
         description: 'There was an error updating the flag, please try again',
       });
+    } finally {
       router.refresh();
     }
   };
@@ -84,6 +87,14 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                   <p className='text-sm text-muted-foreground'>
                     {flag.description}
                   </p>
+                </div>
+                <div>
+                  <Button variant='ghost' size='icon'>
+                    <Pencil size={15} />
+                  </Button>
+                  <Button variant='ghost' size='icon'>
+                    <Trash2 size={15} />
+                  </Button>
                 </div>
                 <div>
                   <Switch
