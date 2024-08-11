@@ -1,6 +1,12 @@
 import { Check } from 'lucide-react';
 
-export const PricingSection = () => {
+import { PlanType } from '@/core/plans';
+
+type PricingSectionProps = {
+  plans: PlanType[];
+};
+
+export const PricingSection = ({ plans }: PricingSectionProps) => {
   return (
     <section id='pricing' className='py-32'>
       <div className='container'>
@@ -14,55 +20,29 @@ export const PricingSection = () => {
         </div>
 
         <div className='flex flex-col md:flex-row gap-8 justify-center'>
-          <div className='text-gray-900 rounded-2xl bg-gray-50 p-6 transition-all duration-500 hover:bg-gray-100'>
-            <h3 className='text-2xl font-bold mb-3'>Free</h3>
-            <div className='flex items-center mb-6'>
-              <span className='mr-2 text-6xl font-semibold'>£0</span>
-              <span className='text-xl text-gray-500 '>/ month</span>
+          {plans.map((plan) => (
+            <div
+              key={plan.title}
+              className='text-gray-900 rounded-2xl bg-gray-50 p-6 transition-all duration-500 hover:bg-gray-100'
+            >
+              <h3 className='text-2xl font-bold mb-3'>{plan.title}</h3>
+              <div className='flex items-center mb-6'>
+                <span className='mr-2 text-6xl font-semibold'>
+                  {plan.price}
+                </span>
+                <span className='text-xl text-gray-500 '>/ month</span>
+              </div>
+
+              <ul className='mb-12 space-y-6 text-left text-lg text-gray-500'>
+                {plan.features.map((feature) => (
+                  <li key={feature} className='flex items-center space-x-4'>
+                    <Check size={25} className='text-emerald-500' />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-
-            <ul className='mb-12 space-y-6 text-left text-lg text-gray-500'>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>1 project</span>
-              </li>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>10 flags</span>
-              </li>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>Create and manage flags</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className='text-gray-900 rounded-2xl bg-gray-50 p-6 transition-all duration-500 hover:bg-gray-100'>
-            <h3 className='text-2xl font-bold mb-3'>Pro</h3>
-            <div className='flex items-center mb-6'>
-              <span className='mr-2 text-6xl font-semibold'>£10</span>
-              <span className='text-xl text-gray-500 '>/ month</span>
-            </div>
-
-            <ul className='mb-12 space-y-6 text-left text-lg text-gray-500'>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>Multiple projects</span>
-              </li>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>Unlimited flags</span>
-              </li>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>Create and manage flags</span>
-              </li>
-              <li className='flex items-center space-x-4'>
-                <Check size={25} className='text-emerald-500' />
-                <span>Production and development flags</span>
-              </li>
-            </ul>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,3 +1,7 @@
+import { PageHeader } from '@/components/core/PageHeader';
+
 export default async function DashboardPage() {
-  return <div>DASHBOARD</div>;
+  return (
+    <PageHeader title='Dashboard' description='Welcome to your dashboard' />
+  );
 }

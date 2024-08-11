@@ -2,7 +2,6 @@
 
 import { Enviroment, Flag } from '@prisma/client';
 import { useRouter } from 'next/navigation';
-import { Fragment } from 'react';
 
 import {
   Select,
@@ -59,7 +58,7 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
   };
 
   return (
-    <Fragment>
+    <section className='mt-4'>
       <Select defaultValue={enviroment} onValueChange={handleEnvChange}>
         <SelectTrigger>
           <SelectValue />
@@ -107,6 +106,6 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
           </p>
         )}
       </div>
-    </Fragment>
+    </section>
   );
 };

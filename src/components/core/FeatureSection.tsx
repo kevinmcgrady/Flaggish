@@ -3,7 +3,11 @@
 import { Check } from 'lucide-react';
 import { CodeBlock, dracula } from 'react-code-blocks';
 
-export const FeatureSection = () => {
+type FeatureSectionsProps = {
+  features: string[];
+};
+
+export const FeatureSection = ({ features }: FeatureSectionsProps) => {
   const serverText = `# server component\n\nimport { getFlags } from 'flaggy-helpers';\n\nconst flags = await getFlags({clientApiKey: "", secretApiKey: ""});`;
   const clientText = `# client component\n\nimport { useGetFlags } from 'flaggy-helpers';\n\nconst {flags, hasError, isLoading} = useGetFlags({clientApiKey: '', secretApiKey: ''});`;
 
@@ -16,28 +20,12 @@ export const FeatureSection = () => {
             <p className='font-light text-white mt-2 text-lg'>The fun stuff!</p>
 
             <ul className='mt-8 space-y-4'>
-              <li className='flex items-center gap-4'>
-                <Check className='text-emerald-400' size={25} />
-                <p className='text-slate-300 flex'>
-                  Create and manage feature flags
-                </p>
-              </li>
-              <li className='flex items-center gap-4'>
-                <Check className='text-emerald-400' size={25} />
-                <p className='text-slate-300 flex'>
-                  Create flags for productions and development
-                </p>
-              </li>
-              <li className='flex items-center gap-4'>
-                <Check className='text-emerald-400' size={25} />
-                <p className='text-slate-300 flex'>Typescript ready</p>
-              </li>
-              <li className='flex items-center gap-4'>
-                <Check className='text-emerald-400' size={25} />
-                <p className='text-slate-300 flex'>
-                  Helper functions for server and client components
-                </p>
-              </li>
+              {features.map((feature) => (
+                <li key={feature} className='flex items-center gap-4'>
+                  <Check className='text-emerald-400' size={25} />
+                  <p className='text-slate-300 flex'>{feature}</p>
+                </li>
+              ))}
             </ul>
           </div>
 

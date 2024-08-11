@@ -2,6 +2,7 @@ import { Enviroment } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
+import { PageHeader } from '@/components/core/PageHeader';
 import { CreateFlagDialog } from '@/components/flags/CreateFlagDialog';
 import { FlagsListForm } from '@/components/flags/FlagsListForm';
 import { getFlags } from '@/queries/flags/getFlags';
@@ -35,22 +36,14 @@ export default async function FlagsPage({ params }: FlagsPageProps) {
 
   return (
     <Fragment>
-      <section className='bg-white p-4 rounded-xl flex justify-between'>
-        <div>
-          <h3 className='font-semibold text-2xl'>
-            Feature Flags for {project.name}
-          </h3>
-          <p className='font-light text-muted-foreground'>
-            Toggle your feature flags below
-          </p>
-        </div>
-
-        <CreateFlagDialog projectId={project.id} projectName={project.name} />
-      </section>
-
-      <section className='mt-4'>
-        <FlagsListForm flags={flags} enviroment={enviroment} />
-      </section>
+      <PageHeader
+        title={`Feature Flags for ${project.name}`}
+        description='Toggle your feature flags below'
+        ctaComponent={
+          <CreateFlagDialog projectId={project.id} projectName={project.name} />
+        }
+      />
+      <FlagsListForm flags={flags} enviroment={enviroment} />
     </Fragment>
   );
 }
