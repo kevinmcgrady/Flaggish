@@ -2,9 +2,9 @@ import { Enviroment } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
-import { PageHeader } from '@/components/core/PageHeader';
 import { CreateFlagDialog } from '@/components/flags/CreateFlagDialog';
 import { FlagsListForm } from '@/components/flags/FlagsListForm';
+import { PageHeader } from '@/components/site/PageHeader';
 import { getFlags } from '@/queries/flags/getFlags';
 import { getProject } from '@/queries/projects/getProject';
 
