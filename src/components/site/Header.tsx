@@ -1,3 +1,4 @@
+import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,7 +21,10 @@ export const Header = () => {
         </Link>
         <Navigation className='hidden md:flex' />
         <AuthNav className='hidden md:flex' />
-        <MobileNav />
+        <div className='flex md:hidden gap-4'>
+          <UserButton />
+          <MobileNav />
+        </div>
       </div>
     </header>
   );
