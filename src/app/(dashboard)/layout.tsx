@@ -14,7 +14,7 @@ export default async function DashboardLayout({
   const hasProject = projects;
 
   return (
-    <div className='min-h-screen flex flex-col bg-[#F8F9FD]'>
+    <div className='flex flex-col bg-[#F8F9FD] flex-1'>
       <div className='mt-4'>
         {hasProject ? (
           <section className='container px-0 flex flex-1 mb-4'>

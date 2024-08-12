@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <ClerkProvider>
-        <body className={cn(poppins.className)}>
+        <body className={cn(poppins.className, 'min-h-screen flex flex-col')}>
           <Header />
           {children}
           <Footer />
