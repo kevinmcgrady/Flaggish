@@ -23,6 +23,8 @@ import { EnviromentType } from '@/types/EnviromentType';
 
 import { Button } from '../ui/button';
 import { useToast } from '../ui/use-toast';
+import { DeleteFlag } from './DeleteFlag';
+import { EditFlag } from './EditFlag';
 
 type FlagsListFormProps = {
   flags: Flag[];
@@ -112,12 +114,8 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className='w-fit flex gap-4'>
-                      <Button size='icon' variant='outline'>
-                        <Pencil size={15} />
-                      </Button>
-                      <Button size='icon' variant='outline'>
-                        <Trash2 size={15} />
-                      </Button>
+                      <EditFlag flag={flag} />
+                      <DeleteFlag flag={flag} />
                     </PopoverContent>
                   </Popover>
                 </div>
