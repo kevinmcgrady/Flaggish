@@ -1,8 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Enviroment } from '@prisma/client';
-import { Loader2, Plus } from 'lucide-react';
+import { Project } from '@prisma/client';
+import { Loader2, Pencil } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,9 +16,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { createFlag } from '@/queries/flags/createFlag';
+import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
 
-import { EnviromentType } from '../../types/EnviromentType';
 import { Button } from '../ui/button';
 import {
   Form,
@@ -29,59 +28,46 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
 import { useToast } from '../ui/use-toast';
 
 const FormSchema = z.object({
   name: z.string().min(3).max(50),
   description: z.string().min(10).max(300),
-  enviroment: z.string(),
 });
 
-type CreateFlagDialogProps = {
-  projectId: string;
-  projectName: string;
+type UpdateProjectDetailsProps = {
+  project: Project;
 };
 
-export const CreateFlagDialog = ({
-  projectId,
-  projectName,
-}: CreateFlagDialogProps) => {
+export const UpdateProjectDetails = ({
+  project,
+}: UpdateProjectDetailsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
   const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      name: project.name,
+      description: project.description,
+    },
   });
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       setIsLoading(true);
-      await createFlag(
-        data.name,
-        data.description,
-        data.enviroment as Enviroment,
-        projectId,
-      );
+      await updateProjectDetails(project.id, data.name, data.description);
       toast({
-        title: 'Flag created!',
-        description: `${data.name} was created`,
+        title: 'Updated!',
+        description: 'Your project was updated',
       });
-
       router.refresh();
     } catch (error) {
       toast({
         variant: 'destructive',
         title: 'Oops!',
-        description: 'There was a problem, please try again',
+        description: 'There was an problem, please try again.',
       });
     } finally {
       setIsLoading(false);
@@ -91,17 +77,18 @@ export const CreateFlagDialog = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size='icon'>
-          <Plus size={20} />
+        <Button variant='outline' size='icon'>
+          <Pencil size={15} />
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add a new flag</DialogTitle>
+          <DialogTitle>Update {project.name}</DialogTitle>
           <DialogDescription>
-            Complete the form below to add a new flag to {projectName}
+            Complete the fields to update {project.name}
           </DialogDescription>
         </DialogHeader>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -113,7 +100,7 @@ export const CreateFlagDialog = ({
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Flag Name</FormLabel>
+                    <FormLabel>Project Name</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
@@ -127,40 +114,10 @@ export const CreateFlagDialog = ({
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Flag Description</FormLabel>
+                    <FormLabel>Project Description</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name='enviroment'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Enviroment</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder='Select the enviroment' />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value={EnviromentType.production}>
-                          Production
-                        </SelectItem>
-                        <SelectItem value={EnviromentType.development}>
-                          Development
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -171,7 +128,7 @@ export const CreateFlagDialog = ({
               {isLoading ? (
                 <Loader2 size={15} className='animate-spin' />
               ) : (
-                'Create'
+                'Update'
               )}
             </Button>
           </form>

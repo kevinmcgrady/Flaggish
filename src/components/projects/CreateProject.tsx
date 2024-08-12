@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from '../ui/form';
 import { Input } from '../ui/input';
+import { useToast } from '../ui/use-toast';
 
 const FormSchema = z.object({
   name: z.string().min(3).max(50),
@@ -28,6 +29,7 @@ const FormSchema = z.object({
 export const CreateProject = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -37,9 +39,17 @@ export const CreateProject = () => {
     try {
       setIsLoading(true);
       await createProject(data.name, data.description);
+      toast({
+        title: 'Project created!',
+        description: `${data.name} as created.`,
+      });
       router.refresh();
     } catch (error) {
-      console.log(error);
+      toast({
+        variant: 'destructive',
+        title: 'Oops!',
+        description: 'There was a problem, please try again',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +95,13 @@ export const CreateProject = () => {
               )}
             />
           </div>
-          <Button type='submit'>{isLoading ? <Loader2 /> : 'Create'}</Button>
+          <Button type='submit'>
+            {isLoading ? (
+              <Loader2 size={15} className='animate-spin' />
+            ) : (
+              'Create'
+            )}
+          </Button>
         </form>
       </Form>
     </div>

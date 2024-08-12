@@ -7,7 +7,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { navItems } from '@/core/navItems';
+import { navItems } from '@/config/navItems';
 import { cn } from '@/lib/utils';
 
 import { Button, buttonVariants } from '../ui/button';

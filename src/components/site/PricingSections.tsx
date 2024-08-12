@@ -1,6 +1,6 @@
 import { Check } from 'lucide-react';
 
-import { PlanType } from '@/core/plans';
+import { PlanType } from '@/config/plans';
 
 type PricingSectionProps = {
   plans: PlanType[];

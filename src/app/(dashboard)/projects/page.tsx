@@ -2,6 +2,7 @@ import { Pencil, Trash2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
+import { UpdateProjectDetails } from '@/components/projects/UpdateProjectDetails';
 import { PageHeader } from '@/components/site/PageHeader';
 import { Button } from '@/components/ui/button';
 import { getProject } from '@/queries/projects/getProject';
@@ -34,9 +35,7 @@ export default async function ProjectsPage() {
           </p>
         </div>
         <div className='flex gap-2'>
-          <Button variant='outline' size='icon'>
-            <Pencil size={15} />
-          </Button>
+          <UpdateProjectDetails project={project} />
           <Button variant='outline' size='icon'>
             <Trash2 size={15} />
           </Button>

@@ -1,8 +1,8 @@
 import { FeatureSection } from '@/components/site/FeatureSection';
 import { Hero } from '@/components/site/Hero';
 import { PricingSection } from '@/components/site/PricingSections';
-import { features } from '@/core/features';
-import { plans } from '@/core/plans';
+import { features } from '@/config/features';
+import { plans } from '@/config/plans';
 
 export default function Home() {
   return (

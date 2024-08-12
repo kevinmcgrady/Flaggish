@@ -3,6 +3,7 @@ export const urls = {
     root: '/',
     features: '/#features',
     pricing: '/#pricing',
+    docs: 'https://flaggish.gitbook.io/flaggish-docs',
   },
   auth: {
     signIn: '/sign-in',

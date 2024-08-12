@@ -8,7 +8,7 @@ type NavItems = {
 export const navItems: NavItems[] = [
   {
     text: 'Documentation',
-    url: urls.home.root,
+    url: urls.home.docs,
   },
   {
     text: 'Features',

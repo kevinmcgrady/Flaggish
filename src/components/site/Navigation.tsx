@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { buttonVariants } from '@/components/ui/button';
-import { navItems } from '@/core/navItems';
+import { navItems } from '@/config/navItems';
 import { cn } from '@/lib/utils';
 
 type NavigationProps = {

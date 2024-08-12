@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { buttonVariants } from '@/components/ui/button';
-import { dashboardNavItems } from '@/core/dashboardNavItems';
+import { dashboardNavItems } from '@/config/dashboardNavItems';
 
 export const DashboardNav = () => {
   const pathname = usePathname();

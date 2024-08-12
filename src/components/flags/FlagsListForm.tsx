@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import { urls } from '@/core/urls';
+import { urls } from '@/config/urls';
 import { updateFlag } from '@/queries/flags/updateFlag';
 import { EnviromentType } from '@/types/EnviromentType';
 
