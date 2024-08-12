@@ -11,8 +11,8 @@ export const urls = {
   },
   dashboard: {
     projects: '/projects',
-    flagsProd: '/flags/production',
-    flagsDev: '/flags/development',
+    flagsProd: '/flags?env=production',
+    flagsDev: '/flags?env=development',
     billing: '/billing',
     apiKeys: '/apiKeys',
   },

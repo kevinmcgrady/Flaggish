@@ -9,9 +9,7 @@ import { getFlags } from '@/queries/flags/getFlags';
 import { getProject } from '@/queries/projects/getProject';
 
 type FlagsPageProps = {
-  params: {
-    env: string;
-  };
+  searchParams: { [key: string]: string };
 };
 
 const envMap: Record<string, Enviroment> = {
@@ -19,14 +17,14 @@ const envMap: Record<string, Enviroment> = {
   development: Enviroment.DEVELOPMENT,
 };
 
-export default async function FlagsPage({ params }: FlagsPageProps) {
+export default async function FlagsPage({ searchParams }: FlagsPageProps) {
   const project = await getProject();
 
   if (!project) {
     return notFound();
   }
 
-  const enviroment = envMap[params.env];
+  const enviroment = envMap[searchParams.env];
 
   if (!enviroment) {
     return notFound();

@@ -11,7 +11,7 @@ export const DashboardNav = () => {
   return (
     <nav className='p-4 bg-white flex flex-col gap-y-4 rounded-xl'>
       {dashboardNavItems.map((item) => {
-        const isActive = pathname.includes(item.url);
+        const isActive = item.url.includes(pathname);
         return (
           <Link
             key={item.text}
