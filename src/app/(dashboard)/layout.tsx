@@ -1,7 +1,7 @@
 import type React from 'react';
 
 import { LeftSidebar } from '@/components/dashboard/LeftSidebar';
-import { CreateProject } from '@/components/projects/CreateProject';
+import { WelcomeScreen } from '@/components/site/WelcomeScreen';
 import { syncUser } from '@/queries/auth/syncUser';
 import { getProject } from '@/queries/projects/getProject';
 
@@ -22,9 +22,7 @@ export default async function DashboardLayout({
             <main className='flex-1 w-full mx-4'>{children}</main>
           </section>
         ) : (
-          <section className='container'>
-            <CreateProject />
-          </section>
+          <WelcomeScreen />
         )}
       </div>
     </div>

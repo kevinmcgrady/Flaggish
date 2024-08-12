@@ -7,6 +7,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { createProject } from '@/queries/projects/createProject';
 
 import { Button } from '../ui/button';
@@ -55,55 +63,62 @@ export const CreateProject = () => {
     }
   };
   return (
-    <div className='bg-white p-4 rounded-xl'>
-      <h3 className='text-2xl font-semibold mb-2'>Create a project</h3>
-      <p className='font-light text-muted-foreground'>
-        Complete the fields below to create your project
-      </p>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Create project</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a project</DialogTitle>
+          <DialogDescription>
+            Complete the fields below to create your project
+          </DialogDescription>
+        </DialogHeader>
 
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='w-full space-y-6'
-        >
-          <div className='space-y-4 mt-4'>
-            <FormField
-              control={form.control}
-              name='name'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='w-full space-y-6'
+          >
+            <div className='space-y-4 mt-4'>
+              <FormField
+                control={form.control}
+                name='name'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name='description'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Project Description</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Project Description</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button type='submit'>
+              {isLoading ? (
+                <Loader2 size={15} className='animate-spin' />
+              ) : (
+                'Create'
               )}
-            />
-          </div>
-          <Button type='submit'>
-            {isLoading ? (
-              <Loader2 size={15} className='animate-spin' />
-            ) : (
-              'Create'
-            )}
-          </Button>
-        </form>
-      </Form>
-    </div>
+            </Button>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
   );
 };

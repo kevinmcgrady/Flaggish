@@ -45,6 +45,6 @@ model Flag {
   isToggled   Boolean
   enviroment  Enviroment
 
-  Project   Project? @relation(fields: [projectId], references: [id])
+  Project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String?
 }
