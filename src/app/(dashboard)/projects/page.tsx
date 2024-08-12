@@ -26,7 +26,7 @@ export default async function ProjectsPage() {
               {project.name}
             </span>
           </p>
-          <p className='text-md font-semibold mb-4'>
+          <p className='text-md font-semibold'>
             Description:{' '}
             <span className='font-normal text-muted-foreground'>
               {project.description}

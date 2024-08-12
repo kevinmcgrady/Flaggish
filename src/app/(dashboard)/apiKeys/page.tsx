@@ -20,14 +20,16 @@ export default async function ApiKeysPage() {
         description='Generate API keys to access feature flags'
       />
       <ApiKeyInput
-        defaultApiKey={project.clientApiKey}
+        apiKey={project.clientApiKey}
         label='Client Key'
         type={ApiKeyType.client}
+        projectId={project.id}
       />
       <ApiKeyInput
-        defaultApiKey={project.secretApiKey}
+        apiKey={project.secretApiKey}
         label='Secret Key'
         type={ApiKeyType.secret}
+        projectId={project.id}
       />
     </Fragment>
   );

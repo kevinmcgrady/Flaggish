@@ -1,33 +1,51 @@
 'use client';
 
-import { Copy, Eye, EyeOff } from 'lucide-react';
+import { Copy, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
-import { generateKey } from '@/lib/generateApiKey';
+import { updateKey } from '@/queries/keys/updateKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
 type ApiKeyInoutProps = {
   label: string;
   type: ApiKeyType;
-  defaultApiKey: string;
+  apiKey: string;
+  projectId: string;
 };
 
 export const ApiKeyInput = ({
   label,
   type,
-  defaultApiKey,
+  apiKey,
+  projectId,
 }: ApiKeyInoutProps) => {
-  const [apiKey, setApiKey] = useState<string>(defaultApiKey);
   const [isHidden, setIsHidden] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
+  const router = useRouter();
 
   const handleGenerateApiKey = async () => {
-    const key = await generateKey(type);
-    setApiKey(key);
+    try {
+      setIsLoading(true);
+      await updateKey(projectId, type);
+      router.refresh();
+      toast({
+        title: 'Key updated',
+        description: 'Your key has been updated.',
+      });
+    } catch (error) {
+      toast({
+        title: 'Oops!',
+        description: 'There was a problem, please try again.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCopyToClipboard = () => {
@@ -63,7 +81,11 @@ export const ApiKeyInput = ({
       </div>
 
       <Button onClick={handleGenerateApiKey} className='mt-4'>
-        Generate new key
+        {isLoading ? (
+          <Loader2 size={15} className='animate-spin' />
+        ) : (
+          'Generate new key'
+        )}
       </Button>
     </section>
   );
