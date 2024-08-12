@@ -71,11 +71,11 @@ export const ApiKeyInput = ({
           type={isHidden ? 'password' : 'text'}
         />
         <div className='flex gap-2 mt-2'>
-          <Button onClick={handleCopyToClipboard} variant='outline' size='icon'>
-            <Copy size={15} />
-          </Button>
           <Button onClick={handleReveal} variant='outline' size='icon'>
             {isHidden ? <Eye size={15} /> : <EyeOff size={15} />}
+          </Button>
+          <Button onClick={handleCopyToClipboard} variant='outline' size='icon'>
+            <Copy size={15} />
           </Button>
         </div>
       </div>
