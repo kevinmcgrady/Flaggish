@@ -6,10 +6,9 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useToast } from '@/components/ui/use-toast';
 import { generateKey } from '@/lib/generateApiKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
-
-import { useToast } from '../ui/use-toast';
 
 type ApiKeyInoutProps = {
   label: string;

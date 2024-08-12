@@ -1,4 +1,4 @@
-import { DashboardNav } from './DashboardNav';
+import { DashboardNav } from '@/components/dashboard/DashboardNav';
 
 export const LeftSidebar = () => {
   return (

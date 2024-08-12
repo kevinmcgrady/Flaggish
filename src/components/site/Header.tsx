@@ -1,11 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { AuthNav } from '@/components/site/AuthNav';
 import { MobileNav } from '@/components/site/MobileNav';
 import { Navigation } from '@/components/site/Navigation';
 import { urls } from '@/config/urls';
-
-import { AuthNav } from './AuthNav';
 
 export const Header = () => {
   return (

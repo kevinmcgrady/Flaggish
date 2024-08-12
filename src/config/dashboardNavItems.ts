@@ -1,4 +1,4 @@
-import { urls } from './urls';
+import { urls } from '@/config/urls';
 
 type DashboardNavItem = {
   text: string;

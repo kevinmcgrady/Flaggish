@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -16,10 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { createFlag } from '@/queries/flags/createFlag';
-
-import { EnviromentType } from '../../types/EnviromentType';
-import { Button } from '../ui/button';
 import {
   Form,
   FormControl,
@@ -27,16 +24,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { useToast } from '../ui/use-toast';
+} from '@/components/ui/select';
+import { useToast } from '@/components/ui/use-toast';
+import { createFlag } from '@/queries/flags/createFlag';
+import { EnviromentType } from '@/types/EnviromentType';
 
 const FormSchema = z.object({
   name: z.string().min(3).max(50),

@@ -16,9 +16,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 import { deleteFlag } from '@/queries/flags/deleteFlag';
-
-import { useToast } from '../ui/use-toast';
 
 type DeleteProjectProps = {
   flag: Flag;

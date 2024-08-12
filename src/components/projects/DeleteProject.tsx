@@ -16,9 +16,8 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/components/ui/use-toast';
 import { deleteProject } from '@/queries/projects/deleteProject';
-
-import { useToast } from '../ui/use-toast';
 
 type DeleteProjectProps = {
   project: Project;

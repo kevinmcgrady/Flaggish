@@ -2,12 +2,13 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flag } from '@prisma/client';
-import { Loader2,Pencil  } from 'lucide-react';
+import { Loader2, Pencil } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -16,9 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { updateFlagDetails } from '@/queries/flags/updateFlagDetails';
-
-import { Button } from '../ui/button';
 import {
   Form,
   FormControl,
@@ -26,9 +24,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
-import { useToast } from '../ui/use-toast';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { updateFlagDetails } from '@/queries/flags/updateFlagDetails';
 
 type EditFlagProps = {
   flag: Flag;

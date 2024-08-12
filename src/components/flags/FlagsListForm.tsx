@@ -1,9 +1,12 @@
 'use client';
 
 import { Enviroment, Flag } from '@prisma/client';
-import { Ellipsis, Pencil, Trash2 } from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+import { DeleteFlag } from '@/components/flags/DeleteFlag';
+import { EditFlag } from '@/components/flags/EditFlag';
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
@@ -17,14 +20,10 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
+import { useToast } from '@/components/ui/use-toast';
 import { urls } from '@/config/urls';
 import { updateFlag } from '@/queries/flags/updateFlag';
 import { EnviromentType } from '@/types/EnviromentType';
-
-import { Button } from '../ui/button';
-import { useToast } from '../ui/use-toast';
-import { DeleteFlag } from './DeleteFlag';
-import { EditFlag } from './EditFlag';
 
 type FlagsListFormProps = {
   flags: Flag[];

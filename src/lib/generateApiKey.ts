@@ -2,7 +2,7 @@
 
 import { randomBytes, scryptSync, timingSafeEqual } from 'crypto';
 
-import { ApiKeyType } from '../types/ApiKeyType';
+import { ApiKeyType } from '@/types/ApiKeyType';
 
 export const generateKey = (type: ApiKeyType) => {
   return type === ApiKeyType.client ? generateClientKey() : generateSecretKey();

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { CreateProject } from '../projects/CreateProject';
+import { CreateProject } from '@/components/projects/CreateProject';
 
 export const WelcomeScreen = () => {
   return (

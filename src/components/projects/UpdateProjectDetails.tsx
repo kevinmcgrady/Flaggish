@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -16,9 +17,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
-
-import { Button } from '../ui/button';
 import {
   Form,
   FormControl,
@@ -26,9 +24,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
-import { Input } from '../ui/input';
-import { useToast } from '../ui/use-toast';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/components/ui/use-toast';
+import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
 
 const FormSchema = z.object({
   name: z.string().min(3).max(50),

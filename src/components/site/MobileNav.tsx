@@ -1,6 +1,7 @@
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Sheet,
   SheetClose,
@@ -9,8 +10,6 @@ import {
 } from '@/components/ui/sheet';
 import { navItems } from '@/config/navItems';
 import { cn } from '@/lib/utils';
-
-import { Button, buttonVariants } from '../ui/button';
 
 export const MobileNav = () => {
   return (
