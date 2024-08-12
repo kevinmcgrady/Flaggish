@@ -33,16 +33,16 @@ type EditFlagProps = {
   flag: Flag;
 };
 
-const FormSchema = z.object({
-  name: z.string().min(3).max(50),
-  description: z.string().min(10).max(300),
-});
-
 export const EditFlag = ({ flag }: EditFlagProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const FormSchema = z.object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(10).max(300),
+  });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -65,7 +65,7 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
         title: 'Flag updated!',
         description: `${data.name} was updated`,
       });
-
+      setIsOpen(false);
       router.refresh();
     } catch (error) {
       toast({
@@ -79,7 +79,7 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button size='icon' variant='outline'>
           <Pencil size={15} />

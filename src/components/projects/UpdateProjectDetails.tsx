@@ -29,11 +29,6 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
 
-const FormSchema = z.object({
-  name: z.string().min(3).max(50),
-  description: z.string().min(10).max(300),
-});
-
 type UpdateProjectDetailsProps = {
   project: Project;
 };
@@ -42,8 +37,14 @@ export const UpdateProjectDetails = ({
   project,
 }: UpdateProjectDetailsProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const FormSchema = z.object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(10).max(300),
+  });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -61,6 +62,7 @@ export const UpdateProjectDetails = ({
         title: 'Updated!',
         description: 'Your project was updated',
       });
+      setIsOpen(false);
       router.refresh();
     } catch (error) {
       toast({
@@ -74,7 +76,7 @@ export const UpdateProjectDetails = ({
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant='outline' size='icon'>
           <Pencil size={15} />

@@ -28,15 +28,15 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { createProject } from '@/queries/projects/createProject';
 
-const FormSchema = z.object({
-  name: z.string().min(3).max(50),
-  description: z.string().min(10).max(300),
-});
-
 export const CreateProject = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const FormSchema = z.object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(10).max(300),
+  });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),

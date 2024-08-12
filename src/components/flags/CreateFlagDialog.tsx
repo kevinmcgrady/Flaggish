@@ -37,12 +37,6 @@ import { useToast } from '@/components/ui/use-toast';
 import { createFlag } from '@/queries/flags/createFlag';
 import { EnviromentType } from '@/types/EnviromentType';
 
-const FormSchema = z.object({
-  name: z.string().min(3).max(50),
-  description: z.string().min(10).max(300),
-  enviroment: z.string(),
-});
-
 type CreateFlagDialogProps = {
   projectId: string;
   projectName: string;
@@ -53,9 +47,15 @@ export const CreateFlagDialog = ({
   projectName,
 }: CreateFlagDialogProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const FormSchema = z.object({
+    name: z.string().min(3).max(50),
+    description: z.string().min(10).max(300),
+    enviroment: z.string(),
+  });
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -74,7 +74,7 @@ export const CreateFlagDialog = ({
         title: 'Flag created!',
         description: `${data.name} was created`,
       });
-
+      setIsOpen(false);
       router.refresh();
     } catch (error) {
       toast({
@@ -88,7 +88,7 @@ export const CreateFlagDialog = ({
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button size='icon'>
           <Plus size={20} />
@@ -166,7 +166,7 @@ export const CreateFlagDialog = ({
               />
             </div>
 
-            <Button type='submit'>
+            <Button>
               {isLoading ? (
                 <Loader2 size={15} className='animate-spin' />
               ) : (
