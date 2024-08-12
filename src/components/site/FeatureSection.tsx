@@ -17,8 +17,6 @@ export const FeatureSection = ({ features }: FeatureSectionsProps) => {
         <div className='grid grid-cols-1 md:grid-cols-2 space-y-8 md:space-y-0'>
           <div>
             <h3 className='text-white text-5xl font-semibold'>Features</h3>
-            <p className='font-light text-white mt-2 text-lg'>The fun stuff!</p>
-
             <ul className='mt-8 space-y-4'>
               {features.map((feature) => (
                 <li key={feature} className='flex items-center gap-4'>

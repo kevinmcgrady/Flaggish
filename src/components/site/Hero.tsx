@@ -6,7 +6,7 @@ export const Hero = () => {
   return (
     <header className='bg-hero-pattern h-[calc(100vh-72px)] bg-no-repeat bg-[100%,80%] bg-bottom'>
       <div className='bg-emerald-200 p-2'>
-        <p className='text-center font-light'>Currently in development</p>
+        <p className='text-center font-medium'>Currently in development 🎉</p>
       </div>
       <Image
         className='pt-20 mx-auto'

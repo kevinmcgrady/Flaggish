@@ -8,7 +8,7 @@ import { urls } from '@/config/urls';
 
 export const Header = () => {
   return (
-    <header className='sticky top-0 z-10 bg-white'>
+    <header className='sticky top-0 z-10 bg-white shadow-md'>
       <div className='container flex items-center justify-between p-4'>
         <Link href={urls.home.root}>
           <Image
