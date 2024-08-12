@@ -11,7 +11,7 @@ export const Clipboard = () => {
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(command);
     toast({
-      title: 'Coppied!',
+      title: 'Copied!',
       description: 'Enjoy 🥳',
     });
   };

@@ -13,6 +13,7 @@ export const Navigation = ({ className }: NavigationProps) => {
     <nav className={cn(className)}>
       {navItems.map((item) => (
         <Link
+          target={item.newTab ? '_blank' : '_self'}
           key={item.text}
           className={buttonVariants({ variant: 'link' })}
           href={item.url}

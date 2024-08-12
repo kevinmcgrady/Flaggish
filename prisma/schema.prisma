@@ -47,4 +47,6 @@ model Flag {
 
   Project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId String?
+
+  @@unique([projectId, name, enviroment])
 }
