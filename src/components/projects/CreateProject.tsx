@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,12 +26,23 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
+import { createStripeSession } from '@/queries/payment/createSession';
 import { createProject } from '@/queries/projects/createProject';
 
-export const CreateProject = () => {
+type CreateProjectProps = {
+  variant?: 'button' | 'icon';
+  isAdditionalProject?: boolean;
+};
+
+export const CreateProject = ({
+  variant = 'button',
+  isAdditionalProject = false,
+}: CreateProjectProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
+
+  const buttonText = isAdditionalProject ? '£10.00' : 'Create';
 
   const FormSchema = z.object({
     name: z.string().min(3).max(50),
@@ -45,12 +56,22 @@ export const CreateProject = () => {
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
       setIsLoading(true);
-      await createProject(data.name, data.description);
-      toast({
-        title: 'Project created!',
-        description: `${data.name} as created.`,
-      });
-      router.refresh();
+
+      if (isAdditionalProject) {
+        const url = await createStripeSession({
+          projectName: data.name,
+          projectDescription: data.description,
+        });
+
+        return router.push(url as string);
+      } else {
+        await createProject(data.name, data.description);
+        toast({
+          title: 'Project created!',
+          description: `${data.name} as created.`,
+        });
+        router.refresh();
+      }
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -64,7 +85,13 @@ export const CreateProject = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Create project</Button>
+        {variant === 'button' ? (
+          <Button>Create project</Button>
+        ) : (
+          <Button size='icon'>
+            <Plus size={20} />
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -112,7 +139,7 @@ export const CreateProject = () => {
               {isLoading ? (
                 <Loader2 size={15} className='animate-spin' />
               ) : (
-                'Create'
+                buttonText
               )}
             </Button>
           </form>

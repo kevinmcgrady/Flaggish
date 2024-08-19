@@ -14,7 +14,7 @@ export const createProject = async (name: string, description: string) => {
   const clientApiKey = await generateKey(ApiKeyType.client);
   const secretApiKey = await generateKey(ApiKeyType.secret);
 
-  await db.project.create({
+  const project = await db.project.create({
     data: {
       userId: authUser.id,
       clientApiKey,
@@ -23,4 +23,6 @@ export const createProject = async (name: string, description: string) => {
       description,
     },
   });
+
+  return project;
 };
