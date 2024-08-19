@@ -30,7 +30,9 @@ export const PricingSection = ({ plans }: PricingSectionProps) => {
                 <span className='mr-2 text-6xl font-semibold'>
                   {plan.price}
                 </span>
-                <span className='text-xl text-gray-500 '>/ month</span>
+                {plan.type === 'paid' && (
+                  <span className='text-xl text-gray-500 '>/ per project</span>
+                )}
               </div>
 
               <ul className='mb-12 space-y-6 text-left text-lg text-gray-500'>

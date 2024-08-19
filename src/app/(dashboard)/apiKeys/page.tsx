@@ -16,7 +16,7 @@ export default async function ApiKeysPage() {
   return (
     <Fragment>
       <PageHeader
-        title='API Keys'
+        title={`API Keys for ${project.name}`}
         description='Generate API keys to access feature flags'
       />
       <ApiKeyInput

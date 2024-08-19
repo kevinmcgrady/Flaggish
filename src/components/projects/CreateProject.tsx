@@ -42,7 +42,7 @@ export const CreateProject = ({
   const router = useRouter();
   const { toast } = useToast();
 
-  const buttonText = isAdditionalProject ? '£10.00' : 'Create';
+  const buttonText = isAdditionalProject ? 'Pay £10.00' : 'Create';
 
   const FormSchema = z.object({
     name: z.string().min(3).max(50),
