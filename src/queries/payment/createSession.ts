@@ -3,19 +3,20 @@
 import { currentUser } from '@clerk/nextjs/server';
 
 import { stripe } from '@/lib/stripe';
+import { absoluteUrl } from '@/utils/absoluteUrl';
 
 type createStripeSessionRequest = {
-  projectName: string;
-  projectDescription: string;
+  projectId: string;
 };
 
 export const createStripeSession = async ({
-  projectDescription,
-  projectName,
+  projectId,
 }: createStripeSessionRequest) => {
   const authUser = await currentUser();
 
   if (!authUser) return null;
+
+  const url = absoluteUrl('/projects');
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -26,11 +27,10 @@ export const createStripeSession = async ({
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/projects?success=true',
-      cancel_url: 'http://localhost:3000/projects?canceled=true',
+      success_url: url,
+      cancel_url: url,
       metadata: {
-        projectName,
-        projectDescription,
+        projectId,
         userId: authUser.id,
       },
     });

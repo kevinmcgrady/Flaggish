@@ -6,7 +6,17 @@ import { db } from '@/lib/db';
 import { generateKey } from '@/lib/generateApiKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
-export const createProject = async (name: string, description: string) => {
+type CreateProjectRequest = {
+  name: string;
+  description: string;
+  isActive: boolean;
+};
+
+export const createProject = async ({
+  name,
+  description,
+  isActive,
+}: CreateProjectRequest) => {
   const authUser = await currentUser();
 
   if (!authUser) return null;
@@ -21,6 +31,7 @@ export const createProject = async (name: string, description: string) => {
       secretApiKey,
       name,
       description,
+      isActive,
     },
   });
 

@@ -2,9 +2,7 @@ import { headers } from 'next/headers';
 import type Stripe from 'stripe';
 
 import { db } from '@/lib/db';
-import { generateKey } from '@/lib/generateApiKey';
 import { stripe } from '@/lib/stripe';
-import { ApiKeyType } from '@/types/ApiKeyType';
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -27,27 +25,20 @@ export async function POST(request: Request) {
 
   const session = event.data.object as Stripe.Checkout.Session;
 
-  if (
-    !session?.metadata?.userId ||
-    !session?.metadata?.projectName ||
-    !session?.metadata?.projectDescription
-  ) {
+  if (!session?.metadata?.userId || !session?.metadata?.projectId) {
     return new Response(null, {
       status: 200,
     });
   }
 
   if (event.type === 'checkout.session.completed') {
-    const clientApiKey = await generateKey(ApiKeyType.client);
-    const secretApiKey = await generateKey(ApiKeyType.secret);
-
-    await db.project.create({
-      data: {
-        name: session.metadata.projectName,
-        description: session.metadata.projectDescription,
+    await db.project.update({
+      where: {
+        id: session.metadata.projectId,
         userId: session.metadata.userId,
-        clientApiKey,
-        secretApiKey,
+      },
+      data: {
+        isActive: true,
       },
     });
   }

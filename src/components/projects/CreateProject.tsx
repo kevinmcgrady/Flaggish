@@ -57,21 +57,27 @@ export const CreateProject = ({
     try {
       setIsLoading(true);
 
+      const project = await createProject({
+        name: data.name,
+        description: data.description,
+        isActive: isAdditionalProject ? false : true,
+      });
+
+      if (!project) throw new Error();
+
       if (isAdditionalProject) {
         const url = await createStripeSession({
-          projectName: data.name,
-          projectDescription: data.description,
+          projectId: project.id,
         });
 
         return router.push(url as string);
-      } else {
-        await createProject(data.name, data.description);
-        toast({
-          title: 'Project created!',
-          description: `${data.name} as created.`,
-        });
-        router.refresh();
       }
+
+      toast({
+        title: 'Project created!',
+        description: `${data.name} as created.`,
+      });
+      router.refresh();
     } catch (error) {
       toast({
         variant: 'destructive',
@@ -82,6 +88,7 @@ export const CreateProject = ({
       setIsLoading(false);
     }
   };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
