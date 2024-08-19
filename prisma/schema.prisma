@@ -37,7 +37,7 @@ model Project {
 
   flags Flag[]
 
-  @@unique([id, userId])
+  @@unique([name, userId])
 }
 
 model Flag {

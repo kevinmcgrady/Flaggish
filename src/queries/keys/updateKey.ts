@@ -3,8 +3,8 @@
 import { currentUser } from '@clerk/nextjs/server';
 
 import { db } from '@/lib/db';
-import { generateKey } from '@/lib/generateApiKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
+import { generateKey } from '@/utils/generateApiKey';
 
 export const updateKey = async (projectId: string, keyType: ApiKeyType) => {
   const authUser = await currentUser();

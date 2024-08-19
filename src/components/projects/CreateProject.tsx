@@ -77,6 +77,7 @@ export const CreateProject = ({
         title: 'Project created!',
         description: `${data.name} as created.`,
       });
+
       router.refresh();
     } catch (error) {
       toast({

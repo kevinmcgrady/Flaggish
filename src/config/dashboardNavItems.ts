@@ -18,8 +18,4 @@ export const dashboardNavItems: DashboardNavItem[] = [
     text: 'API keys',
     url: urls.dashboard.apiKeys,
   },
-  {
-    text: 'Billing',
-    url: urls.dashboard.billing,
-  },
 ];
