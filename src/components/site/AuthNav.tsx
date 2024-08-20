@@ -1,5 +1,4 @@
-import { UserButton } from '@clerk/nextjs';
-import { currentUser } from '@clerk/nextjs/server';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 
 import { buttonVariants } from '@/components/ui/button';
@@ -11,15 +10,24 @@ type AuthNavProps = {
 };
 
 export const AuthNav = async ({ className }: AuthNavProps) => {
-  const isLoggedIn = await currentUser();
   return (
     <div className={cn(className)}>
-      <Link
-        href={urls.projects.root}
-        className={cn(buttonVariants({ size: 'sm' }), 'mr-4')}
-      >
-        {isLoggedIn ? 'Projects' : 'Log in'}
-      </Link>
+      <SignedIn>
+        <Link
+          href={urls.projects.root}
+          className={cn(buttonVariants({ size: 'sm' }), 'mr-4')}
+        >
+          Projects
+        </Link>
+      </SignedIn>
+      <SignedOut>
+        <Link
+          href={urls.auth.signIn}
+          className={cn(buttonVariants({ size: 'sm' }), 'mr-4')}
+        >
+          Sign in
+        </Link>
+      </SignedOut>
       <UserButton />
     </div>
   );

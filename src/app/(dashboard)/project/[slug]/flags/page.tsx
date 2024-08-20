@@ -25,14 +25,9 @@ export default async function FlagsPage({
   params,
 }: FlagsPageProps) {
   const project = await getProject(params.slug);
-
-  if (!project) {
-    return notFound();
-  }
-
   const enviroment = envMap[searchParams.env];
 
-  if (!enviroment) {
+  if (!project || !enviroment) {
     return notFound();
   }
 

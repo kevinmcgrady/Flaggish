@@ -1,9 +1,6 @@
-import Link from 'next/link';
 import type React from 'react';
 
 import { WelcomeScreen } from '@/components/site/WelcomeScreen';
-import { buttonVariants } from '@/components/ui/button';
-import { urls } from '@/config/urls';
 import { syncUser } from '@/queries/auth/syncUser';
 import { getAllProjects } from '@/queries/projects/getAllProjects';
 

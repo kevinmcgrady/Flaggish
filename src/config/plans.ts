@@ -1,11 +1,6 @@
-export type PlanType = {
-  title: string;
-  price: string;
-  features: string[];
-  type: 'free' | 'paid';
-};
+import { Plan, PlanType } from '@/types/PlanType';
 
-export const plans: PlanType[] = [
+export const plans: Plan[] = [
   {
     title: 'Free',
     price: '£0',
@@ -15,7 +10,7 @@ export const plans: PlanType[] = [
       'Create and manage flags',
       'Production and development flags',
     ],
-    type: 'free',
+    type: PlanType.FREE,
   },
   {
     title: 'Pro',
@@ -26,6 +21,6 @@ export const plans: PlanType[] = [
       'Create and manage flags',
       'Production and development flags',
     ],
-    type: 'paid',
+    type: PlanType.PAID,
   },
 ];

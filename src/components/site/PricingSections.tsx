@@ -1,9 +1,9 @@
 import { Check } from 'lucide-react';
 
-import { PlanType } from '@/config/plans';
+import { Plan,PlanType } from '@/types/PlanType';
 
 type PricingSectionProps = {
-  plans: PlanType[];
+  plans: Plan[];
 };
 
 export const PricingSection = ({ plans }: PricingSectionProps) => {
@@ -30,7 +30,7 @@ export const PricingSection = ({ plans }: PricingSectionProps) => {
                 <span className='mr-2 text-6xl font-semibold'>
                   {plan.price}
                 </span>
-                {plan.type === 'paid' && (
+                {plan.type === PlanType.PAID && (
                   <span className='text-xl text-gray-500 '>/ per project</span>
                 )}
               </div>
