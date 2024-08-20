@@ -68,17 +68,21 @@ export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
 
   return (
     <section className='mt-4'>
-      <Select defaultValue={enviroment} onValueChange={handleEnvChange}>
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={EnviromentType.production}>production</SelectItem>
-          <SelectItem value={EnviromentType.development}>
-            development
-          </SelectItem>
-        </SelectContent>
-      </Select>
+      <div className='bg-white rounded-xl p-4'>
+        <Select defaultValue={enviroment} onValueChange={handleEnvChange}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={EnviromentType.production}>
+              production
+            </SelectItem>
+            <SelectItem value={EnviromentType.development}>
+              development
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       <div className='bg-white p-4 rounded-xl mt-4'>
         {hasFlags ? (
