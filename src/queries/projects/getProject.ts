@@ -4,7 +4,7 @@ import { currentUser } from '@clerk/nextjs/server';
 
 import { db } from '@/lib/db';
 
-export const getProject = async () => {
+export const getProject = async (slug: string) => {
   const authUser = await currentUser();
 
   if (!authUser) return null;
@@ -12,6 +12,7 @@ export const getProject = async () => {
   const projects = await db.project.findFirst({
     where: {
       userId: authUser.id,
+      slug: slug,
     },
   });
 

@@ -1,9 +1,15 @@
+import { Project } from '@prisma/client';
+
 import { DashboardNav } from '@/components/dashboard/DashboardNav';
 
-export const LeftSidebar = () => {
+type LeftSidebarProps = {
+  activeProject: Project;
+};
+
+export const LeftSidebar = ({ activeProject }: LeftSidebarProps) => {
   return (
     <aside className='w-[310px] relative hidden xl:flex xl:flex-col rounded-xl'>
-      <DashboardNav />
+      <DashboardNav slug={activeProject.slug} />
     </aside>
   );
 };

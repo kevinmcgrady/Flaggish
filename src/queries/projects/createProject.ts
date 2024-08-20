@@ -1,6 +1,7 @@
 'use server';
 
 import { currentUser } from '@clerk/nextjs/server';
+import slugify from 'slugify';
 
 import { db } from '@/lib/db';
 import { ApiKeyType } from '@/types/ApiKeyType';
@@ -32,6 +33,7 @@ export const createProject = async ({
       name,
       description,
       isActive,
+      slug: slugify(name, { trim: true, lower: true }),
     },
   });
 

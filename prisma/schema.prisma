@@ -31,9 +31,9 @@ model Project {
   clientApiKey String
   secretApiKey String
   isActive     Boolean @default(false)
-
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  slug         String
+  User         User?   @relation(fields: [userId], references: [id])
+  userId       String?
 
   flags Flag[]
 
