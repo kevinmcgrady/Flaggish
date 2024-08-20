@@ -28,14 +28,9 @@ import { EnviromentType } from '@/types/EnviromentType';
 type FlagsListFormProps = {
   flags: Flag[];
   enviroment: Enviroment;
-  slug: string;
 };
 
-export const FlagsListForm = ({
-  flags,
-  enviroment,
-  slug,
-}: FlagsListFormProps) => {
+export const FlagsListForm = ({ flags, enviroment }: FlagsListFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
   const hasFlags = flags && flags.length > 0;
@@ -45,7 +40,7 @@ export const FlagsListForm = ({
       value === EnviromentType.development
         ? urls.dashboard.flagsDev
         : urls.dashboard.flagsProd;
-    router.push(url(slug));
+    router.push(url);
   };
 
   const handleFlagUpdate = async (

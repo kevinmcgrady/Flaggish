@@ -10,9 +10,6 @@ import { getProject } from '@/queries/projects/getProject';
 
 type FlagsPageProps = {
   searchParams: { [key: string]: string };
-  params: {
-    slug: string;
-  };
 };
 
 const envMap: Record<string, Enviroment> = {
@@ -20,11 +17,8 @@ const envMap: Record<string, Enviroment> = {
   development: Enviroment.DEVELOPMENT,
 };
 
-export default async function FlagsPage({
-  searchParams,
-  params,
-}: FlagsPageProps) {
-  const project = await getProject(params.slug);
+export default async function FlagsPage({ searchParams }: FlagsPageProps) {
+  const project = await getProject('mind-haven');
 
   if (!project) {
     return notFound();
@@ -47,7 +41,7 @@ export default async function FlagsPage({
           <CreateFlagDialog projectId={project.id} projectName={project.name} />
         }
       />
-      <FlagsListForm slug={params.slug} flags={flags} enviroment={enviroment} />
+      <FlagsListForm flags={flags} enviroment={enviroment} />
     </Fragment>
   );
 }

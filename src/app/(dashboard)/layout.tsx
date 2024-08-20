@@ -18,7 +18,7 @@ export default async function DashboardLayout({
       <div className='mt-4'>
         {hasProjects ? (
           <section className='container px-0 flex flex-1 mb-4'>
-            <LeftSidebar activeProject={projects[0]} />
+            <LeftSidebar />
             <main className='flex-1 w-full mx-4'>{children}</main>
           </section>
         ) : (

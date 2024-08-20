@@ -6,14 +6,8 @@ import { PageHeader } from '@/components/site/PageHeader';
 import { getProject } from '@/queries/projects/getProject';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
-type ApiKeysPageProps = {
-  params: {
-    slug: string;
-  };
-};
-
-export default async function ApiKeysPage({ params }: ApiKeysPageProps) {
-  const project = await getProject(params.slug);
+export default async function ApiKeysPage() {
+  const project = await getProject('mind-haven');
 
   if (!project) {
     return notFound();
