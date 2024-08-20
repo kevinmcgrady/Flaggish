@@ -51,7 +51,7 @@ export const MobileNav = () => {
                 <SheetClose key={item.text} asChild>
                   <Link
                     className={cn(buttonVariants({ variant: 'link' }), 'p-0')}
-                    href={item.url}
+                    href={item.url('')}
                   >
                     {item.text}
                   </Link>

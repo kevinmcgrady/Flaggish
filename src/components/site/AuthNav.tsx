@@ -15,10 +15,10 @@ export const AuthNav = async ({ className }: AuthNavProps) => {
   return (
     <div className={cn(className)}>
       <Link
-        href={urls.dashboard.projects}
+        href={urls.projects.root}
         className={cn(buttonVariants({ size: 'sm' }), 'mr-4')}
       >
-        {isLoggedIn ? 'Dashboard' : 'Log in'}
+        {isLoggedIn ? 'Projects' : 'Log in'}
       </Link>
       <UserButton />
     </div>

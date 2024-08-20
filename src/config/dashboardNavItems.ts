@@ -2,20 +2,20 @@ import { urls } from '@/config/urls';
 
 type DashboardNavItem = {
   text: string;
-  url: string;
+  url: (slug: string) => string;
 };
 
 export const dashboardNavItems: DashboardNavItem[] = [
   {
-    text: 'Projects',
-    url: urls.dashboard.projects,
+    text: 'Project Details',
+    url: (slug: string) => urls.dashboard.projectDetails(slug),
   },
   {
     text: 'Flags',
-    url: urls.dashboard.flagsProd,
+    url: (slug: string) => urls.dashboard.flagsProd(slug),
   },
   {
     text: 'API keys',
-    url: urls.dashboard.apiKeys,
+    url: (slug: string) => urls.dashboard.apiKeys(slug),
   },
 ];

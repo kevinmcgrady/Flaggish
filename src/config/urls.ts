@@ -9,10 +9,13 @@ export const urls = {
     signIn: '/sign-in',
     signUp: '/sign-up',
   },
+  projects: {
+    root: '/projects',
+  },
   dashboard: {
-    projects: '/projects',
-    flagsProd: '/flags?env=production',
-    flagsDev: '/flags?env=development',
-    apiKeys: '/apiKeys',
+    projectDetails: (slug: string) => `/project/${slug}/project-details`,
+    flagsProd: (slug: string) => `/project/${slug}/flags?env=production`,
+    flagsDev: (slug: string) => `/project/${slug}/flags?env=development`,
+    apiKeys: (slug: string) => `/project/${slug}/apiKeys`,
   },
 };

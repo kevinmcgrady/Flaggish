@@ -13,6 +13,9 @@ export const getAllProjects = async () => {
     where: {
       userId: authUser.id,
     },
+    include: {
+      flags: true,
+    },
   });
 
   return projects;
