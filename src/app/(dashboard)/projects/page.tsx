@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import { CreateProject } from '@/components/projects/CreateProject';
 import { ProjectGrid } from '@/components/projects/ProjectGrid';
 import { PageHeader } from '@/components/site/PageHeader';
+import { Logger } from '@/lib/logger';
 import { getAllProjects } from '@/queries/projects/getAllProjects';
 
 export default async function ProjectsDetailsPage() {
@@ -14,6 +15,8 @@ export default async function ProjectsDetailsPage() {
   }
 
   const isAdditionalProject = projects.length >= 1;
+
+  Logger('hello');
 
   return (
     <Fragment>
