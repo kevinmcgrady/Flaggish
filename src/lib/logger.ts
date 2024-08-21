@@ -7,6 +7,16 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-export const Logger = async (message: string) => {
-  logger.info(message);
+type LoggerArgs = {
+  message: string;
+  journey: string;
+  method?: string;
+};
+
+export const info = async ({ message, journey, method }: LoggerArgs) => {
+  logger.info(`INFO::${message}`, { journey, method });
+};
+
+export const error = async ({ message, journey, method }: LoggerArgs) => {
+  logger.error(`ERROR::${message}`, { journey, method });
 };
