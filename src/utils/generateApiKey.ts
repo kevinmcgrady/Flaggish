@@ -10,7 +10,6 @@ export const generateKey = (type: ApiKeyType) => {
 
 const generateClientKey = () => {
   const buffer = randomBytes(32);
-
   return buffer.toString('base64');
 };
 

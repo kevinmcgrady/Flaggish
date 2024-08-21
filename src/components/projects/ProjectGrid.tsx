@@ -14,7 +14,7 @@ type ProjectGridProps = {
 
 export const ProjectGrid = ({ projects }: ProjectGridProps) => {
   return (
-    <section className='grid grid-cols-1 md:grid-cols-3 mt-4 gap-4'>
+    <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-4'>
       {projects.map((project) => (
         <div
           key={project.id}
