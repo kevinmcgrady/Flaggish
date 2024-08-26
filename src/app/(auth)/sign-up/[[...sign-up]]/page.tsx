@@ -1,14 +1,7 @@
 import { SignUp } from '@clerk/nextjs';
 
+import { authLayout } from '@/config/authLayout';
+
 export default function SignUpPage() {
-  return (
-    <SignUp
-      appearance={{
-        layout: {
-          socialButtonsVariant: 'iconButton',
-          logoImageUrl: '/images/logo.gif',
-        },
-      }}
-    />
-  );
+  return <SignUp appearance={authLayout} />;
 }
