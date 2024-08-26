@@ -19,9 +19,9 @@ export const Header = () => {
             width={30}
           />
         </Link>
-        <Navigation className='hidden md:flex' />
-        <AuthNav className='hidden md:flex' />
-        <div className='flex md:hidden gap-4'>
+        <Navigation className='hidden lg:flex' />
+        <AuthNav className='hidden lg:flex' />
+        <div className='flex lg:hidden gap-4'>
           <UserButton />
           <MobileNav />
         </div>
