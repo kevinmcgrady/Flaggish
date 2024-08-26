@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type React from 'react';
 
+import { DashboardNav } from '@/components/dashboard/DashboardNav';
 import { LeftSidebar } from '@/components/dashboard/LeftSidebar';
 import { getProject } from '@/queries/projects/getProject';
 
@@ -23,6 +24,9 @@ export default async function DashboardLayout({
 
   return (
     <div className='flex flex-col bg-[#F8F9FD] flex-1'>
+      <div className='lg:hidden'>
+        <DashboardNav variant='mobile' slug={params.slug} />
+      </div>
       <div className='mt-4'>
         <section className='container px-0 flex flex-1 mb-4'>
           <LeftSidebar slug={params.slug} />
