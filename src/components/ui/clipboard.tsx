@@ -2,17 +2,17 @@
 
 import { Copy } from 'lucide-react';
 
-import { useToast } from './use-toast';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 
 export const Clipboard = () => {
-  const { toast } = useToast();
+  const { copyToClipboard } = useCopyToClipboard();
   const command = 'npm i @flaggish/sdk';
 
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(command);
-    toast({
-      title: 'Copied!',
-      description: 'Enjoy 🥳',
+    copyToClipboard({
+      textToCopy: command,
+      toastTitle: 'Copied!',
+      toastDescription: 'Enjoy 🥳',
     });
   };
   return (

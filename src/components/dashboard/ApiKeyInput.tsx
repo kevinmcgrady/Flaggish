@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { updateKey } from '@/queries/keys/updateKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
@@ -27,6 +28,7 @@ export const ApiKeyInput = ({
   const [isHidden, setIsHidden] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
+  const { copyToClipboard } = useCopyToClipboard();
   const router = useRouter();
 
   const handleGenerateApiKey = async () => {
@@ -49,10 +51,10 @@ export const ApiKeyInput = ({
   };
 
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(apiKey);
-    toast({
-      title: 'copied!',
-      description: 'Your api key has been copied',
+    copyToClipboard({
+      textToCopy: apiKey,
+      toastTitle: 'copied!',
+      toastDescription: 'Your api key has been copied',
     });
   };
 
