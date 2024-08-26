@@ -12,7 +12,6 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { dashboardNavItems } from '@/config/dashboardNavItems';
 import { navItems } from '@/config/navItems';
 import { urls } from '@/config/urls';
 import { cn } from '@/lib/utils';
@@ -45,19 +44,14 @@ export const MobileNav = () => {
           <Separator />
 
           <SignedIn>
-            <h2 className='font-semibold'>Dashboard</h2>
-            {dashboardNavItems.map((item) => {
-              return (
-                <SheetClose key={item.text} asChild>
-                  <Link
-                    className={cn(buttonVariants({ variant: 'link' }), 'p-0')}
-                    href={item.url('')}
-                  >
-                    {item.text}
-                  </Link>
-                </SheetClose>
-              );
-            })}
+            <SheetClose asChild>
+              <Link
+                className={cn(buttonVariants(), 'w-full')}
+                href={urls.projects.root}
+              >
+                Projects
+              </Link>
+            </SheetClose>
           </SignedIn>
 
           <SignedOut>
