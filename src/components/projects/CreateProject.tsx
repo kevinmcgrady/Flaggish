@@ -1,9 +1,8 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -25,9 +24,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { createStripeSession } from '@/queries/payment/createSession';
 import { createProject } from '@/queries/projects/createProject';
+
+import { SubmitButton } from '../site/SubmitButton';
 
 type CreateProjectProps = {
   variant?: 'button' | 'icon';
@@ -38,9 +39,8 @@ export const CreateProject = ({
   variant = 'button',
   isAdditionalProject = false,
 }: CreateProjectProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, onSubmit } = useSubmitForm();
   const router = useRouter();
-  const { toast } = useToast();
 
   const buttonText = isAdditionalProject ? 'Pay £10.00' : 'Create';
 
@@ -53,41 +53,30 @@ export const CreateProject = ({
     resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setIsLoading(true);
-
-      const project = await createProject({
-        name: data.name,
-        description: data.description,
-        isActive: isAdditionalProject ? false : true,
-      });
-
-      if (!project) throw new Error();
-
-      if (isAdditionalProject) {
-        const url = await createStripeSession({
-          projectId: project.id,
-        });
-
-        return router.push(url as string);
-      }
-
-      toast({
+  const handleCreateProject = async (data: z.infer<typeof FormSchema>) => {
+    await onSubmit({
+      successToast: {
         title: 'Project created!',
         description: `${data.name} as created.`,
-      });
+      },
+      callback: async () => {
+        const project = await createProject({
+          name: data.name,
+          description: data.description,
+          isActive: isAdditionalProject ? false : true,
+        });
 
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was a problem, please try again',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+        if (!project) throw new Error();
+
+        if (isAdditionalProject) {
+          const url = await createStripeSession({
+            projectId: project.id,
+          });
+
+          return router.push(url as string);
+        }
+      },
+    });
   };
 
   return (
@@ -111,7 +100,7 @@ export const CreateProject = ({
 
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(handleCreateProject)}
             className='w-full space-y-6'
           >
             <div className='space-y-4 mt-4'>
@@ -143,13 +132,7 @@ export const CreateProject = ({
                 )}
               />
             </div>
-            <Button type='submit'>
-              {isLoading ? (
-                <Loader2 size={15} className='animate-spin' />
-              ) : (
-                buttonText
-              )}
-            </Button>
+            <SubmitButton isLoading={isLoading}>{buttonText}</SubmitButton>
           </form>
         </Form>
       </DialogContent>

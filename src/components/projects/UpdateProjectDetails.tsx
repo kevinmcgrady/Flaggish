@@ -2,8 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Project } from '@prisma/client';
-import { Loader2, Pencil } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Pencil } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -26,8 +25,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
+
+import { SubmitButton } from '../site/SubmitButton';
 
 type UpdateProjectDetailsProps = {
   project: Project;
@@ -36,10 +37,8 @@ type UpdateProjectDetailsProps = {
 export const UpdateProjectDetails = ({
   project,
 }: UpdateProjectDetailsProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, onSubmit } = useSubmitForm();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const router = useRouter();
-  const { toast } = useToast();
 
   const FormSchema = z.object({
     name: z.string().min(3).max(50),
@@ -54,25 +53,17 @@ export const UpdateProjectDetails = ({
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setIsLoading(true);
-      await updateProjectDetails(project.id, data.name, data.description);
-      toast({
-        title: 'Updated!',
+  const handleUpdateProject = async (data: z.infer<typeof FormSchema>) => {
+    await onSubmit({
+      successToast: {
+        title: 'updated!',
         description: 'Your project was updated',
-      });
-      setIsOpen(false);
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was an problem, please try again.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+      },
+      callback: async () => {
+        await updateProjectDetails(project.id, data.name, data.description);
+        setIsOpen(false);
+      },
+    });
   };
 
   return (
@@ -92,7 +83,7 @@ export const UpdateProjectDetails = ({
 
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(handleUpdateProject)}
             className='w-full space-y-6'
           >
             <div className='space-y-4 mt-4'>
@@ -124,14 +115,7 @@ export const UpdateProjectDetails = ({
                 )}
               />
             </div>
-
-            <Button type='submit'>
-              {isLoading ? (
-                <Loader2 size={15} className='animate-spin' />
-              ) : (
-                'Update'
-              )}
-            </Button>
+            <SubmitButton isLoading={isLoading}>Update</SubmitButton>
           </form>
         </Form>
       </DialogContent>

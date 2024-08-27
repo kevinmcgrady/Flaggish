@@ -1,9 +1,7 @@
 'use client';
 
 import { Project } from '@prisma/client';
-import { Loader2, Trash2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { Trash2 } from 'lucide-react';
 
 import {
   AlertDialog,
@@ -16,32 +14,28 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { deleteProject } from '@/queries/projects/deleteProject';
+
+import { SubmitButton } from '../site/SubmitButton';
 
 type DeleteProjectProps = {
   project: Project;
 };
 
 export const DeleteProject = ({ project }: DeleteProjectProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
-  const router = useRouter();
+  const { isLoading, onSubmit } = useSubmitForm();
 
   const handleDeleteProject = async () => {
-    try {
-      setIsLoading(true);
-      await deleteProject(project.id);
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was a problem, please try again.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    await onSubmit({
+      successToast: {
+        title: 'Project deleted',
+        description: `${project.name} was deleted`,
+      },
+      callback: async () => {
+        await deleteProject(project.id);
+      },
+    });
   };
 
   return (
@@ -63,13 +57,9 @@ export const DeleteProject = ({ project }: DeleteProjectProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={handleDeleteProject}>
-            {isLoading ? (
-              <Loader2 size={15} className='animate-spin' />
-            ) : (
-              'Delete'
-            )}
-          </Button>
+          <SubmitButton isLoading={isLoading} onClick={handleDeleteProject}>
+            Delete
+          </SubmitButton>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
