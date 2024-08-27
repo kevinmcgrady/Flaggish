@@ -12,7 +12,7 @@ export const dashboardNavItems: DashboardNavItem[] = [
   },
   {
     text: 'Flags',
-    url: (slug: string) => urls.dashboard.flagsProd(slug),
+    url: (slug: string) => urls.dashboard.flags(slug),
   },
   {
     text: 'API keys',

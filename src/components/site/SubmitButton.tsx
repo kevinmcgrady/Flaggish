@@ -5,16 +5,16 @@ import { Button } from '@/components/ui/button';
 type SubmitButtonProps = {
   children: string;
   isLoading: boolean;
-  onSubmit?: () => void;
+  onClick?: () => void;
 };
 
 export const SubmitButton = ({
   isLoading,
   children,
-  onSubmit,
+  onClick,
 }: SubmitButtonProps) => {
   return (
-    <Button onSubmit={onSubmit}>
+    <Button type='submit' onClick={onClick}>
       {isLoading ? <Loader2 size={15} className='animate-spin' /> : children}
     </Button>
   );

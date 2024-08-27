@@ -1,4 +1,3 @@
-import { Enviroment } from '@prisma/client';
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
@@ -9,29 +8,19 @@ import { getFlags } from '@/queries/flags/getFlags';
 import { getProject } from '@/queries/projects/getProject';
 
 type FlagsPageProps = {
-  searchParams: { [key: string]: string };
   params: {
     slug: string;
   };
 };
 
-const envMap: Record<string, Enviroment> = {
-  production: Enviroment.PRODUCTION,
-  development: Enviroment.DEVELOPMENT,
-};
-
-export default async function FlagsPage({
-  searchParams,
-  params,
-}: FlagsPageProps) {
+export default async function FlagsPage({ params }: FlagsPageProps) {
   const project = await getProject(params.slug);
-  const enviroment = envMap[searchParams.env];
 
-  if (!project || !enviroment) {
+  if (!project) {
     return notFound();
   }
 
-  const flags = await getFlags(project.id, enviroment);
+  const flags = await getFlags(project.id);
 
   return (
     <Fragment>
@@ -42,7 +31,7 @@ export default async function FlagsPage({
           <CreateFlagDialog projectId={project.id} projectName={project.name} />
         }
       />
-      <FlagsListForm slug={params.slug} flags={flags} enviroment={enviroment} />
+      <FlagsListForm flags={flags} />
     </Fragment>
   );
 }

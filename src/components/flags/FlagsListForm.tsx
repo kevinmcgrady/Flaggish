@@ -1,17 +1,8 @@
 'use client';
 
-import { Enviroment, Flag } from '@prisma/client';
-import { Ellipsis } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Flag } from '@prisma/client';
+import { useState } from 'react';
 
-import { DeleteFlag } from '@/components/flags/DeleteFlag';
-import { EditFlag } from '@/components/flags/EditFlag';
-import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -19,62 +10,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { useToast } from '@/components/ui/use-toast';
-import { urls } from '@/config/urls';
-import { updateFlag } from '@/queries/flags/updateFlag';
 import { EnviromentType } from '@/types/EnviromentType';
+
+import { FlagToggle } from './FlagToggle';
 
 type FlagsListFormProps = {
   flags: Flag[];
-  enviroment: Enviroment;
-  slug: string;
 };
 
-export const FlagsListForm = ({
-  flags,
-  enviroment,
-  slug,
-}: FlagsListFormProps) => {
-  const router = useRouter();
-  const { toast } = useToast();
-  const hasFlags = flags && flags.length > 0;
+export const FlagsListForm = ({ flags }: FlagsListFormProps) => {
+  const [env, setEnv] = useState<EnviromentType>(EnviromentType.development);
 
-  const handleEnvChange = (value: Enviroment) => {
-    const url =
-      value === EnviromentType.development
-        ? urls.dashboard.flagsDev
-        : urls.dashboard.flagsProd;
-    router.push(url(slug));
-  };
+  const filteredFlags = flags.filter((flag) => flag.enviroment === env);
 
-  const handleFlagUpdate = async (
-    projectId: string,
-    isToggled: boolean,
-    flagId: string,
-  ) => {
-    try {
-      await updateFlag(projectId, flagId, isToggled);
-      toast({
-        variant: 'default',
-        title: 'Success!',
-        description: 'The flag has been updated.',
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was an error updating the flag, please try again',
-      });
-    } finally {
-      router.refresh();
-    }
-  };
+  const hasFlags = filteredFlags && filteredFlags.length > 0;
 
   return (
     <section className='mt-4'>
       <div className='bg-white rounded-xl p-4'>
-        <Select defaultValue={enviroment} onValueChange={handleEnvChange}>
+        <Select
+          defaultValue={env}
+          onValueChange={(value) => setEnv(value as EnviromentType)}
+        >
           <SelectTrigger>
             <SelectValue />
           </SelectTrigger>
@@ -92,42 +49,8 @@ export const FlagsListForm = ({
       <div className='bg-white p-4 rounded-xl mt-4'>
         {hasFlags ? (
           <div className='space-y-4'>
-            {flags.map((flag) => (
-              <div
-                key={flag.id}
-                className='flex flex-row items-center justify-between rounded-lg border p-4'
-              >
-                <div className='space-y-0.5'>
-                  <p className='text-base font-semibold'>{flag.name}</p>
-                  <p className='text-sm text-muted-foreground'>
-                    {flag.description}
-                  </p>
-                </div>
-
-                <div className='flex items-center gap-4'>
-                  <Switch
-                    defaultChecked={flag.isToggled}
-                    onCheckedChange={(checked) =>
-                      handleFlagUpdate(
-                        flag.projectId as string,
-                        checked,
-                        flag.id,
-                      )
-                    }
-                  />
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant='outline' size='icon'>
-                        <Ellipsis size={15} />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className='w-fit flex gap-4'>
-                      <EditFlag flag={flag} />
-                      <DeleteFlag flag={flag} />
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </div>
+            {filteredFlags.map((flag) => (
+              <FlagToggle key={flag.id} flag={flag} />
             ))}
           </div>
         ) : (

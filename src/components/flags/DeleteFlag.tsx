@@ -2,8 +2,8 @@
 
 import { Flag } from '@prisma/client';
 import { Trash2 } from 'lucide-react';
+import { useState } from 'react';
 
-import { SubmitButton } from '@/components/site/SubmitButton';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -18,12 +18,15 @@ import { Button } from '@/components/ui/button';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { deleteFlag } from '@/queries/flags/deleteFlag';
 
+import { SubmitButton } from '../site/SubmitButton';
+
 type DeleteProjectProps = {
   flag: Flag;
 };
 
 export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
   const { isLoading, onSubmit } = useSubmitForm();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleDeleteFlag = async () => {
     await onSubmit({
@@ -33,12 +36,13 @@ export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
       },
       callback: async () => {
         await deleteFlag(flag.projectId as string, flag.id);
+        setIsOpen(false);
       },
     });
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
         <Button size='icon' variant='outline'>
           <Trash2 size={15} />
@@ -56,7 +60,7 @@ export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <SubmitButton onSubmit={handleDeleteFlag} isLoading={isLoading}>
+          <SubmitButton isLoading={isLoading} onClick={handleDeleteFlag}>
             Delete
           </SubmitButton>
         </AlertDialogFooter>

@@ -19,7 +19,7 @@ export const useSubmitForm = () => {
   const onSubmit = async ({ callback, successToast }: UseSubmitFormProps) => {
     try {
       setIsLoading(true);
-      await callback;
+      await callback();
       router.refresh();
       toast({
         title: successToast.title,
