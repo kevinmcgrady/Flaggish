@@ -2,12 +2,12 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Flag } from '@prisma/client';
-import { Loader2, Pencil } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Pencil } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { updateFlagDetails } from '@/queries/flags/updateFlagDetails';
 
 type EditFlagProps = {
@@ -34,10 +34,8 @@ type EditFlagProps = {
 };
 
 export const EditFlag = ({ flag }: EditFlagProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { isLoading, onSubmit } = useSubmitForm();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const router = useRouter();
-  const { toast } = useToast();
 
   const FormSchema = z.object({
     name: z.string().min(3).max(50),
@@ -52,30 +50,22 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
     },
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setIsLoading(true);
-      await updateFlagDetails(
-        flag.projectId as string,
-        flag.id,
-        data.name,
-        data.description,
-      );
-      toast({
+  const handleUpdateFlag = async (data: z.infer<typeof FormSchema>) => {
+    await onSubmit({
+      successToast: {
         title: 'Flag updated!',
         description: `${data.name} was updated`,
-      });
-      setIsOpen(false);
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was a problem, please try again',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+      },
+      callback: async () => {
+        await updateFlagDetails(
+          flag.projectId as string,
+          flag.id,
+          data.name,
+          data.description,
+        );
+        setIsOpen(false);
+      },
+    });
   };
 
   return (
@@ -95,7 +85,7 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
         </DialogHeader>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(handleUpdateFlag)}
             className='w-full space-y-6'
           >
             <div className='space-y-4 mt-4'>
@@ -127,14 +117,7 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
                 )}
               />
             </div>
-
-            <Button type='submit'>
-              {isLoading ? (
-                <Loader2 size={15} className='animate-spin' />
-              ) : (
-                'Update'
-              )}
-            </Button>
+            <SubmitButton isLoading={isLoading}>Update</SubmitButton>
           </form>
         </Form>
       </DialogContent>

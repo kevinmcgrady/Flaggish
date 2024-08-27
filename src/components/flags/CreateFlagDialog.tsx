@@ -2,12 +2,12 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Enviroment } from '@prisma/client';
-import { Loader2, Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -33,7 +33,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { createFlag } from '@/queries/flags/createFlag';
 import { EnviromentType } from '@/types/EnviromentType';
 
@@ -46,10 +46,8 @@ export const CreateFlagDialog = ({
   projectId,
   projectName,
 }: CreateFlagDialogProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const router = useRouter();
-  const { toast } = useToast();
+  const { isLoading, onSubmit } = useSubmitForm();
 
   const FormSchema = z.object({
     name: z.string().min(3).max(50),
@@ -61,30 +59,22 @@ export const CreateFlagDialog = ({
     resolver: zodResolver(FormSchema),
   });
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      setIsLoading(true);
-      await createFlag(
-        data.name,
-        data.description,
-        data.enviroment as Enviroment,
-        projectId,
-      );
-      toast({
+  const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
+    await onSubmit({
+      successToast: {
         title: 'Flag created!',
         description: `${data.name} was created`,
-      });
-      setIsOpen(false);
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was a problem, please try again',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+      },
+      callback: async () => {
+        await createFlag(
+          data.name,
+          data.description,
+          data.enviroment as Enviroment,
+          projectId,
+        );
+        setIsOpen(false);
+      },
+    });
   };
 
   return (
@@ -103,7 +93,7 @@ export const CreateFlagDialog = ({
         </DialogHeader>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(handleSubmit)}
             className='w-full space-y-6'
           >
             <div className='space-y-4 mt-4'>
@@ -159,20 +149,12 @@ export const CreateFlagDialog = ({
                         </SelectItem>
                       </SelectContent>
                     </Select>
-
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-
-            <Button>
-              {isLoading ? (
-                <Loader2 size={15} className='animate-spin' />
-              ) : (
-                'Create'
-              )}
-            </Button>
+            <SubmitButton isLoading={isLoading}>Create</SubmitButton>
           </form>
         </Form>
       </DialogContent>

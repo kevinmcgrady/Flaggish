@@ -1,10 +1,9 @@
 'use client';
 
 import { Flag } from '@prisma/client';
-import { Loader2, Trash2 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { Trash2 } from 'lucide-react';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -16,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/components/ui/use-toast';
+import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { deleteFlag } from '@/queries/flags/deleteFlag';
 
 type DeleteProjectProps = {
@@ -24,28 +23,18 @@ type DeleteProjectProps = {
 };
 
 export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { toast } = useToast();
-  const router = useRouter();
+  const { isLoading, onSubmit } = useSubmitForm();
 
   const handleDeleteFlag = async () => {
-    try {
-      setIsLoading(true);
-      await deleteFlag(flag.projectId as string, flag.id);
-      toast({
+    await onSubmit({
+      successToast: {
         title: 'Deleted!',
         description: `${flag.name} was deleted.`,
-      });
-      router.refresh();
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Oops!',
-        description: 'There was a problem, please try again.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+      },
+      callback: async () => {
+        await deleteFlag(flag.projectId as string, flag.id);
+      },
+    });
   };
 
   return (
@@ -67,13 +56,9 @@ export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button onClick={handleDeleteFlag}>
-            {isLoading ? (
-              <Loader2 size={15} className='animate-spin' />
-            ) : (
-              'Delete'
-            )}
-          </Button>
+          <SubmitButton onSubmit={handleDeleteFlag} isLoading={isLoading}>
+            Delete
+          </SubmitButton>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
