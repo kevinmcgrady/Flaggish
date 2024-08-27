@@ -13,8 +13,9 @@
     "prisma:studio": "npx prisma studio",
     "prisma:generate": "npx prisma generate",
     "prisma:db:push": "npx prisma db push",
+    "test": "vitest --watch=false",
     "test:watch": "vitest --watch",
-    "test": "vitest --watch=false"
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.14",
@@ -59,6 +60,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-istanbul": "^2.0.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
