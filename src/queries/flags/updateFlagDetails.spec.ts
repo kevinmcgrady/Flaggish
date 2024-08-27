@@ -1,9 +1,8 @@
 import { currentUser, User } from '@clerk/nextjs/server';
-import { describe,expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { db } from '@/lib/db';
-
-import { updateFlagDetails } from './updateFlagDetails';
+import { updateFlagDetails } from '@/queries/flags/updateFlagDetails';
 
 vi.mock('@clerk/nextjs/server');
 vi.mock('@/lib/db', () => {

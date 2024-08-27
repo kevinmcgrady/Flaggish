@@ -1,10 +1,9 @@
 import { currentUser, User } from '@clerk/nextjs/server';
-import { beforeEach,describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { stripe } from '@/lib/stripe';
+import { createStripeSession } from '@/queries/payment/createSession';
 import { absoluteUrl } from '@/utils/absoluteUrl';
-
-import { createStripeSession } from './createSession';
 
 beforeEach(() => {
   vi.resetAllMocks();
