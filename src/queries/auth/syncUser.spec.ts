@@ -2,7 +2,7 @@ import { currentUser, User } from '@clerk/nextjs/server';
 import { describe, expect, it, vi } from 'vitest';
 
 import { db } from '@/lib/db';
-import { error } from '@/lib/logger';
+import { error, info } from '@/lib/logger';
 import { syncUser } from '@/queries/auth/syncUser';
 
 vi.mock('@clerk/nextjs/server');
@@ -43,9 +43,9 @@ describe('syncUser', () => {
     };
 
     vi.mocked(currentUser).mockResolvedValue(authUser as User);
-
     const mockedDbUser = vi.mocked(db.user.findUnique).mockResolvedValue(null);
     const mockedDbUserCreate = vi.mocked(db.user.create);
+    const successLogMock = vi.mocked(info);
 
     await syncUser();
 
@@ -58,6 +58,12 @@ describe('syncUser', () => {
         firstName: authUser.firstName!,
         lastName: authUser.lastName!,
       },
+    });
+    expect(successLogMock).toHaveBeenCalledTimes(1);
+    expect(successLogMock).toHaveBeenCalledWith({
+      message: 'user created',
+      journey: 'auth',
+      method: 'syncUser',
     });
   });
 });
