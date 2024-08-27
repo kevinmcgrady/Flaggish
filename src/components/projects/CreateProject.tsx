@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -27,8 +28,6 @@ import { Input } from '@/components/ui/input';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { createStripeSession } from '@/queries/payment/createSession';
 import { createProject } from '@/queries/projects/createProject';
-
-import { SubmitButton } from '../site/SubmitButton';
 
 type CreateProjectProps = {
   variant?: 'button' | 'icon';

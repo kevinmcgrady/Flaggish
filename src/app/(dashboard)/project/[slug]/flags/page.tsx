@@ -22,6 +22,10 @@ export default async function FlagsPage({ params }: FlagsPageProps) {
 
   const flags = await getFlags(project.id);
 
+  if (!flags) {
+    return notFound();
+  }
+
   return (
     <Fragment>
       <PageHeader

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -27,8 +28,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { updateProjectDetails } from '@/queries/projects/updateProjectDetails';
-
-import { SubmitButton } from '../site/SubmitButton';
 
 type UpdateProjectDetailsProps = {
   project: Project;

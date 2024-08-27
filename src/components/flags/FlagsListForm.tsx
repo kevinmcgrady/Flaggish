@@ -3,6 +3,7 @@
 import { Flag } from '@prisma/client';
 import { useState } from 'react';
 
+import { FlagToggle } from '@/components/flags/FlagToggle';
 import {
   Select,
   SelectContent,
@@ -11,8 +12,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { EnviromentType } from '@/types/EnviromentType';
-
-import { FlagToggle } from './FlagToggle';
 
 type FlagsListFormProps = {
   flags: Flag[];

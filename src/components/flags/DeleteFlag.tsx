@@ -4,6 +4,7 @@ import { Flag } from '@prisma/client';
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -17,8 +18,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { deleteFlag } from '@/queries/flags/deleteFlag';
-
-import { SubmitButton } from '../site/SubmitButton';
 
 type DeleteProjectProps = {
   flag: Flag;

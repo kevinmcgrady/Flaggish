@@ -3,6 +3,7 @@
 import { Project } from '@prisma/client';
 import { Trash2 } from 'lucide-react';
 
+import { SubmitButton } from '@/components/site/SubmitButton';
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -16,8 +17,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { deleteProject } from '@/queries/projects/deleteProject';
-
-import { SubmitButton } from '../site/SubmitButton';
 
 type DeleteProjectProps = {
   project: Project;

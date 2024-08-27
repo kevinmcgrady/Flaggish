@@ -7,7 +7,7 @@ import { db } from '@/lib/db';
 export const getFlags = async (projectId: string) => {
   const authUser = await currentUser();
 
-  if (!authUser) return [];
+  if (!authUser) return null;
 
   const flags = await db.flag.findMany({
     where: {

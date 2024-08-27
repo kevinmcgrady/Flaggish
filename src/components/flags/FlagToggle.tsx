@@ -3,14 +3,17 @@
 import { Flag } from '@prisma/client';
 import { Ellipsis } from 'lucide-react';
 
+import { DeleteFlag } from '@/components/flags/DeleteFlag';
+import { EditFlag } from '@/components/flags/EditFlag';
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
 import { updateFlag } from '@/queries/flags/updateFlag';
-
-import { Button } from '../ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { DeleteFlag } from './DeleteFlag';
-import { EditFlag } from './EditFlag';
 
 type FlagToggleProps = {
   flag: Flag;
