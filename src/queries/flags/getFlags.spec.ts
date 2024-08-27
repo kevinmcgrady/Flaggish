@@ -3,8 +3,7 @@ import { Flag } from '@prisma/client';
 import { describe, expect, it, vi } from 'vitest';
 
 import { db } from '@/lib/db';
-
-import { getFlags } from './getFlags';
+import { getFlags } from '@/queries/flags/getFlags';
 
 vi.mock('@clerk/nextjs/server');
 vi.mock('@/lib/db', () => {
