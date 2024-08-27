@@ -56,7 +56,7 @@ export const EditFlag = ({ flag }: EditFlagProps) => {
         title: 'Flag updated!',
         description: `${data.name} was updated`,
       },
-      callback: async () => {
+      action: async () => {
         await updateFlagDetails(
           flag.projectId as string,
           flag.id,

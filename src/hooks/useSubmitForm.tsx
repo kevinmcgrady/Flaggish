@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 
 type UseSubmitFormProps = {
-  callback: () => void;
+  action: () => void;
   successToast: {
     title: string;
     description: string;
@@ -16,10 +16,10 @@ export const useSubmitForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const onSubmit = async ({ callback, successToast }: UseSubmitFormProps) => {
+  const onSubmit = async ({ action, successToast }: UseSubmitFormProps) => {
     try {
       setIsLoading(true);
-      await callback();
+      await action();
       router.refresh();
       toast({
         title: successToast.title,

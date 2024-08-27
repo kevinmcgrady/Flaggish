@@ -32,7 +32,7 @@ export const FlagToggle = ({ flag }: FlagToggleProps) => {
         title: 'Flag updated!',
         description: 'Your flag has been updated',
       },
-      callback: async () => {
+      action: async () => {
         await updateFlag(projectId, flagId, isToggled);
       },
     });

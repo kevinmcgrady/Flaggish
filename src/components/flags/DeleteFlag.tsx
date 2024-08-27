@@ -33,7 +33,7 @@ export const DeleteFlag = ({ flag }: DeleteProjectProps) => {
         title: 'Deleted!',
         description: `${flag.name} was deleted.`,
       },
-      callback: async () => {
+      action: async () => {
         await deleteFlag(flag.projectId as string, flag.id);
         setIsOpen(false);
       },

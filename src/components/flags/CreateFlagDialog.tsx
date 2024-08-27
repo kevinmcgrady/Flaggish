@@ -65,7 +65,7 @@ export const CreateFlagDialog = ({
         title: 'Flag created!',
         description: `${data.name} was created`,
       },
-      callback: async () => {
+      action: async () => {
         await createFlag(
           data.name,
           data.description,

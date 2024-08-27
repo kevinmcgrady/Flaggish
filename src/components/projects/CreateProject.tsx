@@ -58,7 +58,7 @@ export const CreateProject = ({
         title: 'Project created!',
         description: `${data.name} as created.`,
       },
-      callback: async () => {
+      action: async () => {
         const project = await createProject({
           name: data.name,
           description: data.description,

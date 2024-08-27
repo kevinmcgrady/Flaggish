@@ -35,7 +35,7 @@ export const ApiKeyInput = ({
         title: 'Key updated',
         description: 'Your key has been updated.',
       },
-      callback: async () => {
+      action: async () => {
         await updateKey(projectId, type);
       },
     });

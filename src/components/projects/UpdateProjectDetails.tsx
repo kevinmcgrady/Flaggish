@@ -58,7 +58,7 @@ export const UpdateProjectDetails = ({
         title: 'updated!',
         description: 'Your project was updated',
       },
-      callback: async () => {
+      action: async () => {
         await updateProjectDetails(project.id, data.name, data.description);
         setIsOpen(false);
       },

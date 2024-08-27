@@ -31,7 +31,7 @@ export const DeleteProject = ({ project }: DeleteProjectProps) => {
         title: 'Project deleted',
         description: `${project.name} was deleted`,
       },
-      callback: async () => {
+      action: async () => {
         await deleteProject(project.id);
       },
     });
