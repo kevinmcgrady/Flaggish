@@ -15,7 +15,7 @@
     "prisma:db:push": "npx prisma db push",
     "test": "vitest --watch=false",
     "test:watch": "vitest --watch",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage --watch=false"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.14",
