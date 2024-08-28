@@ -1,10 +1,9 @@
 import { currentUser, User } from '@clerk/nextjs/server';
-import { beforeEach, describe, expect,it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { db } from '@/lib/db';
+import { getAllProjects } from '@/queries/projects/getAllProjects';
 import { ProjectWithFlags } from '@/types/ProjectWithFlags';
-
-import { getAllProjects } from './getAllProjects';
 
 beforeEach(() => {
   vi.resetAllMocks();
