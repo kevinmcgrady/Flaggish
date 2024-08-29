@@ -58,16 +58,27 @@ export const ApiKeyInput = ({
       <Label>{label}</Label>
       <div className='flex gap-4 items-center'>
         <Input
+          data-testid='api-input'
           className='text-muted-foreground text-sm'
           readOnly
           value={apiKey}
           type={isHidden ? 'password' : 'text'}
         />
         <div className='flex gap-2'>
-          <Button onClick={handleReveal} variant='outline' size='icon'>
+          <Button
+            data-testid='hide-button'
+            onClick={handleReveal}
+            variant='outline'
+            size='icon'
+          >
             {isHidden ? <Eye size={15} /> : <EyeOff size={15} />}
           </Button>
-          <Button onClick={handleCopyToClipboard} variant='outline' size='icon'>
+          <Button
+            data-testid='copy-button'
+            onClick={handleCopyToClipboard}
+            variant='outline'
+            size='icon'
+          >
             <Copy size={15} />
           </Button>
         </div>
