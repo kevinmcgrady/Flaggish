@@ -1,8 +1,7 @@
-import { describe, expect,it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { useToast } from '@/components/ui/use-toast';
-
-import { useCopyToClipboard } from './useCopyToClipboard';
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 
 vi.mock('@/components/ui/use-toast', () => {
   return {
