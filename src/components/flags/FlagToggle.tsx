@@ -37,6 +37,7 @@ export const FlagToggle = ({ flag }: FlagToggleProps) => {
       },
     });
   };
+
   return (
     <div className='flex flex-row items-center justify-between rounded-lg border p-4'>
       <div className='space-y-0.5'>
