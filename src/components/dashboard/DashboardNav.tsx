@@ -19,6 +19,7 @@ export const DashboardNav = ({
   const pathname = usePathname();
   return (
     <nav
+      data-testid='dashboard-nav'
       className={cn(`p-4 bg-white flex gap-4 rounded-xl`, {
         'flex-row': variant === 'mobile',
         'flex-col': variant === 'desktop',
