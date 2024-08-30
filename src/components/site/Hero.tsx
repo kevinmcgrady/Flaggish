@@ -16,9 +16,10 @@ export const Hero = () => {
         animate={{ y: 0, opacity: 1 }}
       >
         <Image
+          role='img'
           className='pt-20 mx-auto'
           src='/images/logo.png'
-          alt='Flaggish'
+          alt='Flaggish logo'
           width={50}
           height={50}
         />
