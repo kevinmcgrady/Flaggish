@@ -1,7 +1,6 @@
 describe('Homepage', () => {
   beforeEach(() => {
     cy.visit('/');
-    cy.intercept('*');
   });
 
   it('should display the hero section', () => {

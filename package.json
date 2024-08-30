@@ -55,6 +55,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@clerk/testing": "^1.2.16",
     "@clerk/types": "^4.14.0",
     "@rollup/plugin-typescript": "^8.3.3",
     "@testing-library/dom": "^10.4.0",
