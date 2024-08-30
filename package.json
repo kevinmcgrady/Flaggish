@@ -15,7 +15,9 @@
     "prisma:db:push": "npx prisma db push",
     "test": "vitest --watch=false",
     "test:watch": "vitest --watch",
-    "test:coverage": "vitest --coverage --watch=false"
+    "test:coverage": "vitest --coverage --watch=false",
+    "e2e:headless": "cypress run --e2e",
+    "e2e": "cypress open"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.14",
@@ -63,6 +65,7 @@
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-istanbul": "^1.6.0",
+    "cypress": "^13.14.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",
