@@ -37,7 +37,7 @@ export const ActivateProjectButton = ({
   };
 
   return (
-    <Button onClick={handleActivate}>
+    <Button role='button' onClick={handleActivate}>
       {isLoading ? <Loader2 size={15} className='animate-spin' /> : 'Activate'}
     </Button>
   );
