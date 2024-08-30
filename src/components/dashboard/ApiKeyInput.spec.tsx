@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { describe, expect,it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
+import { updateKey } from '@/actions/keys/updateKey';
 import { ApiKeyInput } from '@/components/dashboard/ApiKeyInput';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
-import { updateKey } from '@/queries/keys/updateKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
 vi.mock('@/hooks/useSubmitForm', () => {
@@ -24,7 +24,7 @@ vi.mock('@/hooks/useCopyToClipboard', () => {
   };
 });
 
-vi.mock('@/queries/keys/updateKey', () => {
+vi.mock('@/actions/keys/updateKey', () => {
   return {
     updateKey: vi.fn(),
   };

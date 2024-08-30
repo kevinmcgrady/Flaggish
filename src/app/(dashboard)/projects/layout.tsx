@@ -1,8 +1,8 @@
 import type React from 'react';
 
+import { syncUser } from '@/actions/auth/syncUser';
+import { getAllProjects } from '@/actions/projects/getAllProjects';
 import { WelcomeScreen } from '@/components/site/WelcomeScreen';
-import { syncUser } from '@/queries/auth/syncUser';
-import { getAllProjects } from '@/queries/projects/getAllProjects';
 
 export default async function ProjectsLayout({
   children,

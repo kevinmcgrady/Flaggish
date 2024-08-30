@@ -3,13 +3,13 @@
 import { Copy, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 
+import { updateKey } from '@/actions/keys/updateKey';
 import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
-import { updateKey } from '@/queries/keys/updateKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
 type ApiKeyInoutProps = {

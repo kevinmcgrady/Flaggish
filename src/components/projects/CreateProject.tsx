@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { createStripeSession } from '@/actions/payment/createSession';
+import { createProject } from '@/actions/projects/createProject';
 import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,8 +28,6 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
-import { createStripeSession } from '@/queries/payment/createSession';
-import { createProject } from '@/queries/projects/createProject';
 
 type CreateProjectProps = {
   variant?: 'button' | 'icon';

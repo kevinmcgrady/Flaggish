@@ -2,8 +2,8 @@ import { currentUser, User } from '@clerk/nextjs/server';
 import { Flag } from '@prisma/client';
 import { describe, expect, it, vi } from 'vitest';
 
+import { getFlags } from '@/actions/flags/getFlags';
 import { db } from '@/lib/db';
-import { getFlags } from '@/queries/flags/getFlags';
 
 vi.mock('@clerk/nextjs/server');
 vi.mock('@/lib/db', () => {

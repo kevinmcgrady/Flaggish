@@ -1,8 +1,8 @@
 import { currentUser, User } from '@clerk/nextjs/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { updateKey } from '@/actions/keys/updateKey';
 import { db } from '@/lib/db';
-import { updateKey } from '@/queries/keys/updateKey';
 import { ApiKeyType } from '@/types/ApiKeyType';
 import { generateKey } from '@/utils/generateApiKey';
 

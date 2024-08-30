@@ -2,8 +2,8 @@ import { currentUser, User } from '@clerk/nextjs/server';
 import { Project } from '@prisma/client';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createProject } from '@/actions/projects/createProject';
 import { db } from '@/lib/db';
-import { createProject } from '@/queries/projects/createProject';
 import { ApiKeyType } from '@/types/ApiKeyType';
 import { generateKey } from '@/utils/generateApiKey';
 

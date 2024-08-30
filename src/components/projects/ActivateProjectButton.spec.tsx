@@ -3,9 +3,9 @@ import '@testing-library/jest-dom';
 import { Project } from '@prisma/client';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
-import { describe, expect,it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import { createStripeSession } from '@/queries/payment/createSession';
+import { createStripeSession } from '@/actions/payment/createSession';
 
 import { useToast } from '../ui/use-toast';
 import { ActivateProjectButton } from './ActivateProjectButton';
@@ -18,7 +18,7 @@ vi.mock('@/components/ui/use-toast', () => {
     })),
   };
 });
-vi.mock('@/queries/payment/createSession');
+vi.mock('@/actions/payment/createSession');
 
 const project: Project = {
   id: 'project-id',

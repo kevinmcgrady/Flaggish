@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { createFlag } from '@/actions/flags/createFlag';
 import { SubmitButton } from '@/components/site/SubmitButton';
 import { Button } from '@/components/ui/button';
 import {
@@ -34,7 +35,6 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
-import { createFlag } from '@/queries/flags/createFlag';
 import { EnviromentType } from '@/types/EnviromentType';
 
 type CreateFlagDialogProps = {

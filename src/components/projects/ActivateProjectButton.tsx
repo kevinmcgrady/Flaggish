@@ -5,9 +5,9 @@ import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { createStripeSession } from '@/actions/payment/createSession';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import { createStripeSession } from '@/queries/payment/createSession';
 
 type ActivateProjectButtonProps = {
   project: Project;

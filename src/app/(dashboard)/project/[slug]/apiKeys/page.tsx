@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
+import { getProject } from '@/actions/projects/getProject';
 import { ApiKeyInput } from '@/components/dashboard/ApiKeyInput';
 import { PageHeader } from '@/components/site/PageHeader';
-import { getProject } from '@/queries/projects/getProject';
 import { ApiKeyType } from '@/types/ApiKeyType';
 
 type ApiKeysPageProps = {

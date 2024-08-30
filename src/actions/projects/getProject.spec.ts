@@ -2,8 +2,8 @@ import { currentUser, User } from '@clerk/nextjs/server';
 import { Project } from '@prisma/client';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { getProject } from '@/actions/projects/getProject';
 import { db } from '@/lib/db';
-import { getProject } from '@/queries/projects/getProject';
 
 beforeEach(() => {
   vi.resetAllMocks();

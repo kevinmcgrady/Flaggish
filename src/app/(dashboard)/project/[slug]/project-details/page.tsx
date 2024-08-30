@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Fragment } from 'react';
 
+import { getProject } from '@/actions/projects/getProject';
 import { ProjectDetails } from '@/components/projects/ProjectDetails';
 import { PageHeader } from '@/components/site/PageHeader';
-import { getProject } from '@/queries/projects/getProject';
 
 type ProjectsDetailsPageProps = {
   params: {

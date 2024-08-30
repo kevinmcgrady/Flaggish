@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import type React from 'react';
 
+import { getProject } from '@/actions/projects/getProject';
 import { DashboardNav } from '@/components/dashboard/DashboardNav';
 import { LeftSidebar } from '@/components/dashboard/LeftSidebar';
-import { getProject } from '@/queries/projects/getProject';
 
 type DashboardLayoutProps = {
   params: {

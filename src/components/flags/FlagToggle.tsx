@@ -3,6 +3,7 @@
 import { Flag } from '@prisma/client';
 import { Ellipsis } from 'lucide-react';
 
+import { updateFlag } from '@/actions/flags/updateFlag';
 import { DeleteFlag } from '@/components/flags/DeleteFlag';
 import { EditFlag } from '@/components/flags/EditFlag';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,6 @@ import {
 } from '@/components/ui/popover';
 import { Switch } from '@/components/ui/switch';
 import { useSubmitForm } from '@/hooks/useSubmitForm';
-import { updateFlag } from '@/queries/flags/updateFlag';
 
 type FlagToggleProps = {
   flag: Flag;

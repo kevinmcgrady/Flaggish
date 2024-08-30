@@ -1,8 +1,8 @@
 import { currentUser, User } from '@clerk/nextjs/server';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { createStripeSession } from '@/actions/payment/createSession';
 import { stripe } from '@/lib/stripe';
-import { createStripeSession } from '@/queries/payment/createSession';
 import { absoluteUrl } from '@/utils/absoluteUrl';
 
 beforeEach(() => {

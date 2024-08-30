@@ -1,9 +1,9 @@
 import { currentUser, User } from '@clerk/nextjs/server';
 import { describe, expect, it, vi } from 'vitest';
 
+import { syncUser } from '@/actions/auth/syncUser';
 import { db } from '@/lib/db';
 import { error, info } from '@/lib/logger';
-import { syncUser } from '@/queries/auth/syncUser';
 
 vi.mock('@clerk/nextjs/server');
 vi.mock('@/lib/db', () => {
