@@ -6,9 +6,8 @@ import { useRouter } from 'next/navigation';
 import { describe, expect, it, vi } from 'vitest';
 
 import { createStripeSession } from '@/actions/payment/createSession';
-
-import { useToast } from '../ui/use-toast';
-import { ActivateProjectButton } from './ActivateProjectButton';
+import { ActivateProjectButton } from '@/components/projects/ActivateProjectButton';
+import { useToast } from '@/components/ui/use-toast';
 
 vi.mock('next/navigation');
 vi.mock('@/components/ui/use-toast', () => {

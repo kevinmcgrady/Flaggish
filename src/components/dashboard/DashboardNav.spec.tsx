@@ -1,11 +1,11 @@
 import '@testing-library/jest-dom';
 
-import { render,screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { usePathname } from 'next/navigation';
-import { describe, expect,it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import { buttonVariants } from '../ui/button';
-import { DashboardNav } from './DashboardNav';
+import { DashboardNav } from '@/components/dashboard/DashboardNav';
+import { buttonVariants } from '@/components/ui/button';
 
 vi.mock('next/navigation');
 vi.mock('@/components/ui/button');

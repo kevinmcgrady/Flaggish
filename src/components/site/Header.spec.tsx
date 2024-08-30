@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Header } from './Header';
+import { Header } from '@/components/site/Header';
 
 vi.mock('@clerk/nextjs', () => {
   return {

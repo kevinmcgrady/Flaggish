@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 
-import { render,screen } from '@testing-library/react';
-import { describe, expect,it, vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
-import { LeftSidebar } from './LeftSidebar';
+import { LeftSidebar } from '@/components/dashboard/LeftSidebar';
 
 vi.mock('@/components/dashboard/DashboardNav', () => {
   return {
