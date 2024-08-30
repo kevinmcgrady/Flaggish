@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 
-import { render,screen } from '@testing-library/react';
-import { describe, expect,it } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import { Footer } from '@/components/site/Footer';
 import { navItems } from '@/config/navItems';
 
-describe('Footer', () => {
+describe('<Footer />', () => {
   it('should display the nav links', () => {
     render(<Footer />);
 

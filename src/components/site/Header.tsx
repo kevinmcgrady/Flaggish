@@ -13,6 +13,7 @@ export const Header = () => {
       <div className='container flex items-center justify-between p-4'>
         <Link href={urls.home.root}>
           <Image
+            role='img'
             src='/images/logo.png'
             alt='Flaggish logo'
             height={30}
