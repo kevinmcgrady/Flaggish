@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 import type React from 'react';
 
 import { Footer } from '@/components/site/Footer';
@@ -34,6 +35,12 @@ export default function RootLayout({
     <html lang='en'>
       <ClerkProvider>
         <body className={cn(poppins.className, 'min-h-screen flex flex-col')}>
+          <NextTopLoader
+            showSpinner={false}
+            color='#847DF9'
+            easing='ease'
+            initialPosition={0.08}
+          />
           <Header />
           {children}
           <Footer />

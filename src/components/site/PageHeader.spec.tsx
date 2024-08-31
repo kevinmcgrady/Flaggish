@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { PageHeader } from './PageHeader';
+import { PageHeader } from '@/components/site/PageHeader';
 
 const title = 'title';
 const description = 'description';
