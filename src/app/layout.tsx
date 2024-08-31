@@ -11,6 +11,7 @@ import type React from 'react';
 import { Footer } from '@/components/site/Footer';
 import { Header } from '@/components/site/Header';
 import { Toaster } from '@/components/ui/toaster';
+import { nextTopLoaderProps } from '@/config/nextTopLoader';
 import { cn } from '@/lib/utils';
 
 const poppins = Poppins({
@@ -35,12 +36,7 @@ export default function RootLayout({
     <html lang='en'>
       <ClerkProvider>
         <body className={cn(poppins.className, 'min-h-screen flex flex-col')}>
-          <NextTopLoader
-            showSpinner={false}
-            color='#847DF9'
-            easing='ease'
-            initialPosition={0.08}
-          />
+          <NextTopLoader {...nextTopLoaderProps} />
           <Header />
           {children}
           <Footer />
