@@ -20,12 +20,15 @@ export const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant='ghost' size='icon'>
+        <Button data-testid='mobile-trigger' variant='ghost' size='icon'>
           <Menu size={20} />
         </Button>
       </SheetTrigger>
       <SheetContent side='top'>
-        <div className='flex flex-col items-start mt-8 space-y-4'>
+        <div
+          data-testid='nav-content'
+          className='flex flex-col items-start mt-8 space-y-4'
+        >
           <h2 className='font-semibold'>Site</h2>
           {navItems.map((item) => {
             return (
