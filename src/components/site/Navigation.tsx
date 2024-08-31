@@ -10,7 +10,7 @@ type NavigationProps = {
 
 export const Navigation = ({ className }: NavigationProps) => {
   return (
-    <nav className={cn(className)}>
+    <nav role='navigation' className={cn(className)}>
       {navItems.map((item) => (
         <Link
           target={item.newTab ? '_blank' : '_self'}
