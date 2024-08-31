@@ -3,9 +3,8 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { PricingSection } from '@/components/site/PricingSections';
 import { Plan, PlanType } from '@/types/PlanType';
-
-import { PricingSection } from './PricingSections';
 
 describe('<PricingSection />', () => {
   it('it display the title and subtitle', () => {
