@@ -15,7 +15,11 @@ export const SubmitButton = ({
 }: SubmitButtonProps) => {
   return (
     <Button type='submit' onClick={onClick}>
-      {isLoading ? <Loader2 size={15} className='animate-spin' /> : children}
+      {isLoading ? (
+        <Loader2 data-testid='loader' size={15} className='animate-spin' />
+      ) : (
+        children
+      )}
     </Button>
   );
 };
