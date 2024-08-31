@@ -1,9 +1,13 @@
 import { currentUser, User } from '@clerk/nextjs/server';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach,describe, expect, it, vi } from 'vitest';
 
 import { syncUser } from '@/actions/auth/syncUser';
 import { db } from '@/lib/db';
 import { error, info } from '@/lib/logger';
+
+beforeEach(() => {
+  vi.resetAllMocks();
+});
 
 vi.mock('@clerk/nextjs/server');
 vi.mock('@/lib/db', () => {
@@ -65,5 +69,29 @@ describe('syncUser', () => {
       journey: 'auth',
       method: 'syncUser',
     });
+  });
+
+  it('should return if the user already has an account', async () => {
+    const authUser = {
+      id: 'user-id',
+      imageUrl: 'image-url',
+      emailAddresses: [{ emailAddress: 'email' }],
+      firstName: 'first-name',
+      lastName: 'last-name',
+    };
+
+    vi.mocked(currentUser).mockResolvedValue(authUser as User);
+
+    const mockedDbUser = vi
+      .mocked(db.user.findUnique)
+      .mockResolvedValue({ id: 'user-id' } as any);
+    const mockedDbUserCreate = vi.mocked(db.user.create);
+    const successLogMock = vi.mocked(info);
+
+    await syncUser();
+
+    expect(mockedDbUser).toBeCalledTimes(1);
+    expect(mockedDbUserCreate).toBeCalledTimes(0);
+    expect(successLogMock).toHaveBeenCalledTimes(0);
   });
 });

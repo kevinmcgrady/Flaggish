@@ -40,4 +40,6 @@ export const syncUser = async () => {
       method: 'syncUser',
     });
   }
+
+  return;
 };
