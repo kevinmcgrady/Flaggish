@@ -9,9 +9,9 @@ type AuthNavProps = {
   className?: string;
 };
 
-export const AuthNav = async ({ className }: AuthNavProps) => {
+export const AuthNav = ({ className }: AuthNavProps) => {
   return (
-    <div className={cn(className)}>
+    <div data-testid='auth-nav' className={cn(className)}>
       <SignedIn>
         <Link
           href={urls.projects.root}

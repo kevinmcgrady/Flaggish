@@ -1,14 +1,13 @@
 import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { describe,expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { navItems } from '@/config/navItems';
 import { urls } from '@/config/urls';
 
 import { MobileNav } from '../MobileNav';
 
-vi.mock('@clerk/nextjs');
 vi.mock('@clerk/nextjs', () => {
   return {
     SignedIn: vi.fn((props) => <div data-testid='signed-in' {...props} />),
