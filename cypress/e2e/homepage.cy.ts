@@ -10,10 +10,6 @@ describe('Homepage', () => {
       'contain',
       `Flaggish is a feature flag manager for NextJs`,
     );
-
-    cy.get('button').should('contain', 'npm i @flaggish/sdk');
-    cy.contains('npm i @flaggish/sdk').click();
-    cy.get('div').should('contain', 'Copied!');
   });
 
   it('should display the feature section', () => {
@@ -62,5 +58,11 @@ describe('Homepage', () => {
 
     cy.get('a[href*="features"]').eq(0).click();
     cy.url().should('contain', '/#features');
+  });
+
+  it('should display the copied toast when the copy button is clicked', () => {
+    cy.get('button').should('contain', 'npm i @flaggish/sdk');
+    cy.contains('npm i @flaggish/sdk').click();
+    cy.get('div').should('contain', 'Copied!');
   });
 });

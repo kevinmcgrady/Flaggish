@@ -14,9 +14,9 @@ enum Enviroment {
 
 model User {
   id           String   @id @default(uuid())
-  firstName    String
-  lastName     String
-  imageUrl     String   @db.Text
+  firstName    String?
+  lastName     String?
+  imageUrl     String?  @db.Text
   emailAddress String   @unique
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
